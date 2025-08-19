@@ -24,7 +24,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <img src="/logo1.svg" alt="Mathy Logo" className="h-10 w-auto" />
+            <img src="/logo2.svg" alt="Mathy Logo" className="h-10 w-auto" />
           </div>
 
           {/* Middle Navigation */}
@@ -130,7 +130,7 @@ export default function LandingPage() {
         description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
         imageSrc="/demo3.png"
         imageAlt="Math Question Demo"
-        buttonText="立即體驗"
+        buttonText="開始練習"
         backgroundImageSrc=""
         backgroundImageAlt="Math elements"
         onButtonClick={() => {
