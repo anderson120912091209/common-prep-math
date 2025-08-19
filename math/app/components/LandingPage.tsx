@@ -118,71 +118,52 @@ export default function LandingPage() {
       </section>
 
       {/* Demo Section */}
-      <section className="bg-white py-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-blue-50 rounded-3xl p-12 shadow-lg">
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 items-center">
-              {/* Left - Demo Image */}
-              <div className="xl:col-span-3 flex justify-center">
-                <img 
-                  src="/demo3.png" 
-                  alt="Math Question Demo" 
-                  className="w-full max-w-4xl h-auto"
-                />
-              </div>
-
-              {/* Right - Description */}
-              <div className="xl:col-span-2 space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  真實考試體驗
-                </h2>
-                <p className="text-base text-gray-700">
-                  我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。
-                </p>
-                
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-                      <svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 text-sm">真實題庫</h3>
-                      <p className="text-gray-600 text-sm">來自歷年考試的真實題目</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
-                      <svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 text-sm">智能評分</h3>
-                      <p className="text-gray-600 text-sm">AI 驅動的評分系統</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center mt-0.5">
-                      <svg className="w-3 h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 text-sm">互動功能</h3>
-                      <p className="text-gray-600 text-sm">數學符號輸入、圖形繪製工具</p>
-                    </div>
+      <section className="bg-white py-12 md:py-20">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <div 
+              className="rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-lg relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #f1f3f8 0%, #e8f0fe 50%, #dce7f7 100%)'
+              }}
+            >
+              {/* Math transparent image at corner - hidden on mobile */}
+              <img 
+                src="/math-transparent.png" 
+                alt="Math elements" 
+                className="absolute hidden md:block xl:left-130 xl:top-15 
+                md:left-80 md:top-10 opacity-70 
+                md:w-200 md:h-133 xl:w-200 xl:h-133"
+              />
+            {/* Inner container to control content size */}
+            <div className="max-w-full md:max-w-3xl xl:max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 lg:gap-20 xl:gap-40 items-center relative z-10">
+                {/* Left - Demo Image */}
+                <div className="md:col-span-3 flex justify-center md:justify-start">
+                  <div className="max-w-sm md:max-w-lg xl:max-w-2xl">
+                    <img 
+                      src="/demo3.png" 
+                      alt="Math Question Demo" 
+                      className="w-full h-auto"
+                    />
                   </div>
                 </div>
 
-                <div className="pt-3">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors text-sm">
+                {/* Right - Description */}
+                <div className="md:col-span-2 space-y-3 md:space-y-4 text-center md:text-left">
+                <h2 className="text-lg md:text-2xl font-bold text-gray-900">
+                  真實の考試體驗
+                </h2>
+                <div className="space-y-2 xl:mt-10 md:mt-10"></div>
+                <p className="text-xs md:text-base text-gray-700">
+                  我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。
+                </p>
+
+                <div className="pt-1 md:pt-2 text-center md:text-left">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 md:px-5 md:py-2 rounded-lg font-medium transition-colors text-xs md:text-sm">
                     立即體驗
                   </button>
                 </div>
+              </div>
               </div>
             </div>
           </div>
