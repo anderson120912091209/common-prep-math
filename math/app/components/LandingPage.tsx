@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import DemoSection from './DemoSection';
 
 export default function LandingPage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
-  const rotatingWords = ["學測", "競賽", "IB", "AP"];
+  const rotatingWords = ["學測", "國中", "競賽", "微積分", "統計", "幾何"];
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,8 +20,8 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
-      <nav className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <nav className="bg-white px-6 py-4">
+        <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
           {/* Logo Placeholder */}
           <div className="flex items-center">
             <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -127,57 +128,19 @@ export default function LandingPage() {
       </section>
 
       {/* Demo Section */}
-      <section className="bg-white py-4 md:py-12">
-          <div className="max-w-7xl mx-auto px-4 md:px-6">
-            <div 
-              className="rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-lg relative overflow-hidden"
-              style={{
-                background: 'linear-gradient(135deg, #f1f3f8 0%, #e8f0fe 50%, #dce7f7 100%)'
-              }}
-            >
-              {/* Math transparent image at corner - hidden on mobile */}
-              <img 
-                src="/math-transparent.png" 
-                alt="Math elements" 
-                className="absolute hidden md:block xl:left-130 xl:top-15 
-                md:left-80 md:top-10 opacity-70 
-                md:w-200 md:h-133 xl:w-200 xl:h-133"
-              />
-            {/* Inner container to control content size */}
-            <div className="max-w-full md:max-w-3xl xl:max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 lg:gap-20 xl:gap-40 items-center relative z-10">
-                {/* Left - Demo Image */}
-                <div className="md:col-span-3 flex justify-center md:justify-start">
-                  <div className="max-w-sm md:max-w-lg xl:max-w-2xl">
-                    <img 
-                      src="/demo3.png" 
-                      alt="Math Question Demo" 
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-
-                {/* Right - Description */}
-                <div className="md:col-span-2 space-y-3 md:space-y-4 text-center md:text-left">
-                <h2 className="text-lg xl:text-3xl md:text-2xl font-bold text-[#2B2B2B]">
-                  真實的考試體驗 
-                </h2>
-                <div className="space-y-2 xl:mt-10 md:mt-10"></div>
-                <p className="text-xs md:text-base text-[#2B2B2B] font-bold">
-                  我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。
-                </p>
-
-                <div className="pt-1 md:pt-2 text-center md:text-left">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 md:px-5 md:py-2 rounded-lg font-medium transition-colors text-xs md:text-sm">
-                    立即體驗
-                  </button>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DemoSection
+        title="真實的考試體驗"
+        description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
+        imageSrc="/demo3.png"
+        imageAlt="Math Question Demo"
+        buttonText="立即體驗"
+        backgroundImageSrc="/math-transparent.png"
+        backgroundImageAlt="Math elements"
+        onButtonClick={() => {
+          // Handle button click
+          console.log('Demo section button clicked');
+        }}
+      />
     </div>
   );
 }
