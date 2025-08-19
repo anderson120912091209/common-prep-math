@@ -19,8 +19,8 @@ export default function MathQuestion({ isLandingPage = false }: MathQuestionProp
   const [celebrationText, setCelebrationText] = useState('');
   
   // Define correct answers (can be changed as needed)
-  const correctAnswer1 = 4; // Option (4) for question 1
-  const correctAnswer2 = 2; // Option (2) for question 2
+  const correctAnswer1 = 4 as number; // Option (4) for question 1
+  const correctAnswer2 = 2 as number; // Option (2) for question 2
 
   const handleOptionClick = (questionNumber: number, optionNumber: number) => {
     if (questionNumber === 1) {
