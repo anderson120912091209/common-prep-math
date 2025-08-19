@@ -6,10 +6,14 @@ import DemoSection from './DemoSection';
 export default function LandingPage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   
   const rotatingWords = ["學測", "國中", "競賽", "微積分", "統計", "幾何"];
   
   useEffect(() => {
+    // Trigger initial load animation
+    setIsLoaded(true);
+    
     const interval = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 2000);
@@ -88,26 +92,48 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
             {/* Left - Slogan */}
             <div className="lg:ml-12">
-              <h1 className="text-5xl font-bold text-[#2B2B2B] mb-6">
-                <span className="text-[#7A9CEB] transition-all duration-500 ease-in-out">
-                  {rotatingWords[currentWordIndex]}
-                </span>
-                <span className="text-5xl font-bold text-[#2B2B2B] mb-6"> 數學，可以很簡單</span>
-                <br />
-              </h1>
-              <p className="text-xl text-[#2B2B2B] mb-8">
-                真實題庫、智能評分、個人化學習路徑
-                <br />
-                讓數學學習變得更有效率
-              </p>
-              <div className="flex items-center gap-4">
-                <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                  立即開始
-                </button>
-                <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                  了解更多
-                </button>
-              </div>
+                             {/* YC Badge */}
+               <div className={`flex items-center justify-between gap-x-4 border-2 border-gray-300 p-2 text-sm font-medium text-[#2B2B2B] backdrop-blur-lg transition-all duration-1000 ease-out rounded-full h-[53px] min-w-[200px] w-fit mb-4 transform ${
+                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+               }`}>
+                 <span className="flex items-center justify-center rounded-full bg-[#7A9CEB] px-3 py-1 text-center text-white">
+                   最新消息
+                 </span>
+                 <a href="#" className="flex items-center font truncate underline-offset-2 transition-all">
+                   Beta 測試版本將由 9/20 發行，加入測試名單
+                   <svg className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1" 
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                   </svg>
+                 </a>
+               </div>
+               
+               <h1 className={`text-5xl font-bold text-[#2B2B2B] mb-6 transition-all duration-1000 ease-out delay-200 transform ${
+                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+               }`}>
+                 <span className="text-[#7A9CEB] transition-all duration-500 ease-in-out">
+                   {rotatingWords[currentWordIndex]}
+                 </span>
+                 <span className="text-5xl font-bold text-[#2B2B2B] mb-6"> 數學，可以很簡單</span>
+                 <br />
+               </h1>
+               <p className={`text-xl text-[#2B2B2B] mb-8 transition-all duration-1000 ease-out delay-400 transform ${
+                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+               }`}>
+                 真實題庫、智能評分、個人化學習路徑
+                 <br />
+                 讓數學學習變得更有效率
+               </p>
+                             <div className={`flex items-center gap-4 transition-all duration-1000 ease-out delay-600 transform ${
+                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+               }`}>
+                 <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                   立即開始
+                 </button>
+                 <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                   了解更多
+                 </button>
+               </div>
             </div>
 
             {/* Right - Image */}
