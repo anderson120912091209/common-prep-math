@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import DemoSection from './DemoSection';
+import { useRouter } from 'next/navigation';
 
 export default function LandingPage() {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -124,16 +126,19 @@ export default function LandingPage() {
                  <br />
                  讓數學學習變得更有效率
                </p>
-                             <div className={`flex items-center gap-4 transition-all duration-1000 ease-out delay-600 transform ${
-                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-               }`}>
-                 <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                   立即開始
-                 </button>
-                 <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                   了解更多
-                 </button>
-               </div>
+                                             <div className={`flex items-center gap-4 transition-all duration-1000 ease-out delay-600 transform ${
+                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}>
+                  <button 
+                    onClick={() => router.push('/waitlist')}
+                    className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors"
+                  >
+                    立即開始
+                  </button>
+                  <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                    了解更多
+                  </button>
+                </div>
             </div>
 
             {/* Right - Image */}
