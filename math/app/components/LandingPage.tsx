@@ -15,7 +15,7 @@ export default function LandingPage() {
             <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
               <span className="text-gray-500 font-bold text-lg">L</span>
             </div>
-            <span className="ml-3 text-xl font-bold text-gray-900">數學助手</span>
+            <span className="ml-3 text-xl font-bold text-[#2B2B2B]">數學助手</span>
           </div>
 
           {/* Middle Navigation */}
@@ -23,7 +23,7 @@ export default function LandingPage() {
             {/* Features Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-gray-900 font-medium"
+                className="flex items-center text-gray-700 hover:text-[#2B2B2B] font-medium"
                 onClick={() => setActiveDropdown(activeDropdown === 'features' ? null : 'features')}
               >
                 功能特色
@@ -43,7 +43,7 @@ export default function LandingPage() {
             {/* Courses Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-gray-900 font-medium"
+                className="flex items-center text-gray-700 hover:text-[#2B2B2B] font-medium"
                 onClick={() => setActiveDropdown(activeDropdown === 'courses' ? null : 'courses')}
               >
                 課程內容
@@ -60,8 +60,8 @@ export default function LandingPage() {
               )}
             </div>
 
-            <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">學習支援</a>
-            <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">關於我們</a>
+            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] font-medium">學習支援</a>
+            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] font-medium">關於我們</a>
           </div>
 
           {/* Sign In Button */}
@@ -74,17 +74,17 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
             {/* Left - Slogan */}
-            <div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                掌握數學
+            <div className="lg:ml-12">
+              <h1 className="text-5xl font-bold text-[#2B2B2B] mb-6">
+                學測數學，可以很簡單
                 <br />
-                <span className="text-blue-600">成就未來</span>
+                <span className="text-blue-600"></span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-[#2B2B2B] mb-8">
                 真實題庫、智能評分、個人化學習路徑
                 <br />
                 讓數學學習變得更有效率
@@ -93,24 +93,20 @@ export default function LandingPage() {
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
                   立即開始
                 </button>
-                <button className="border border-gray-300 hover:border-gray-400 text-gray-700 px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
                   了解更多
                 </button>
               </div>
             </div>
 
-            {/* Right - Image Placeholder */}
+            {/* Right - Image */}
             <div className="flex justify-center">
-              <div className="w-96 h-96 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center border-2 border-dashed border-blue-300">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-300 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <p className="text-blue-600 font-medium">圖片佔位符</p>
-                  <p className="text-sm text-blue-500">將來放置您的圖片</p>
-                </div>
+              <div className="w-[500px] h-[500px] rounded-2xl overflow-hidden">
+                <img 
+                  src="/animals.png" 
+                  alt="Animals illustration" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -118,7 +114,7 @@ export default function LandingPage() {
       </section>
 
       {/* Demo Section */}
-      <section className="bg-white py-12 md:py-20">
+      <section className="bg-white py-4 md:py-12">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div 
               className="rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-lg relative overflow-hidden"
@@ -150,11 +146,11 @@ export default function LandingPage() {
 
                 {/* Right - Description */}
                 <div className="md:col-span-2 space-y-3 md:space-y-4 text-center md:text-left">
-                <h2 className="text-lg md:text-2xl font-bold text-gray-900">
-                  真實の考試體驗
+                <h2 className="text-lg xl:text-3xl md:text-2xl font-bold text-[#2B2B2B]">
+                  真實的考試體驗 
                 </h2>
                 <div className="space-y-2 xl:mt-10 md:mt-10"></div>
-                <p className="text-xs md:text-base text-gray-700">
+                <p className="text-xs md:text-base text-[#2B2B2B] font-bold">
                   我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。
                 </p>
 
