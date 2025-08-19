@@ -22,12 +22,9 @@ export default function LandingPage() {
       {/* Navigation Bar */}
       <nav className="bg-white px-6 py-4">
         <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
-          {/* Logo Placeholder */}
+          {/* Logo */}
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
-              <span className="text-gray-500 font-bold text-lg">L</span>
-            </div>
-            <span className="ml-3 text-xl font-bold text-[#2B2B2B]">數學助手</span>
+            <img src="/logo1.svg" alt="Mathy Logo" className="h-10 w-auto" />
           </div>
 
           {/* Middle Navigation */}
@@ -78,7 +75,7 @@ export default function LandingPage() {
 
           {/* Sign In Button */}
           <div className="flex items-center gap-2">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+            <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-2 rounded-lg font-medium transition-colors">
               登入
             </button>
           </div>
@@ -92,7 +89,7 @@ export default function LandingPage() {
             {/* Left - Slogan */}
             <div className="lg:ml-12">
               <h1 className="text-5xl font-bold text-[#2B2B2B] mb-6">
-                <span className="text-blue-400 transition-all duration-500 ease-in-out">
+                <span className="text-[#7A9CEB] transition-all duration-500 ease-in-out">
                   {rotatingWords[currentWordIndex]}
                 </span>
                 <span className="text-5xl font-bold text-[#2B2B2B] mb-6"> 數學，可以很簡單</span>
@@ -104,7 +101,7 @@ export default function LandingPage() {
                 讓數學學習變得更有效率
               </p>
               <div className="flex items-center gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
                   立即開始
                 </button>
                 <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
@@ -134,7 +131,20 @@ export default function LandingPage() {
         imageSrc="/demo3.png"
         imageAlt="Math Question Demo"
         buttonText="立即體驗"
-        backgroundImageSrc="/math-transparent.png"
+        backgroundImageSrc=""
+        backgroundImageAlt="Math elements"
+        onButtonClick={() => {
+          // Handle button click
+          console.log('Demo section button clicked');
+        }}
+      />
+      <DemoSection
+        title="有趣，刺激的競賽"
+        description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
+        imageSrc="/demo3.png"
+        imageAlt="Math Question Demo"
+        buttonText="立即體驗"
+        backgroundImageSrc=""
         backgroundImageAlt="Math elements"
         onButtonClick={() => {
           // Handle button click

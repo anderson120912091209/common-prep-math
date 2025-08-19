@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "數學助手 - 學測數學學習平台",
+  title: "Mathy 數學可以很好玩 | 台灣數學教育平台",
   description: "真實題庫、智能評分、個人化學習路徑，讓數學學習變得更有效率",
 };
 
