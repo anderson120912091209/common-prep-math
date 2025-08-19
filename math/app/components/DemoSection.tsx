@@ -67,7 +67,7 @@ export default function DemoSection({
 
                 <div className="pt-2">
                   <button 
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-medium transition-colors text-sm md:text-base shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-medium transition-colors text-sm md:text-base shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                     onClick={onButtonClick}
                   >
                     {buttonText}

@@ -138,19 +138,46 @@ export default function LandingPage() {
           console.log('Demo section button clicked');
         }}
       />
-      <DemoSection
-        title="有趣，刺激的競賽"
-        description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
-        imageSrc="/demo3.png"
-        imageAlt="Math Question Demo"
-        buttonText="立即體驗"
-        backgroundImageSrc=""
-        backgroundImageAlt="Math elements"
-        onButtonClick={() => {
-          // Handle button click
-          console.log('Demo section button clicked');
-        }}
-      />
+
+      {/* Split Screen Section */}
+      <section className="relative mt-24 flex w-full max-w-7xl flex-col gap-6 px-6 md:flex-row md:px-12 mx-auto">
+        {/* Left Panel */}
+        <div className="md:w-1/3">
+          <div className="sticky left-1/2 top-1/2">
+            <h2 className="font-bold text-[#2B2B2B] text-3xl md:text-4xl leading-tight">
+              透過有趣，刺激的競賽學習任何等級的數學
+            </h2>
+          </div>
+        </div>
+
+        {/* Right Panel */}
+        <div className="mt-6 flex w-full flex-col gap-6 md:mt-0 md:w-2/3 md:gap-12">
+          {/* First Card */}
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
+            <h3 className="text-xl md:text-2xl font-bold mb-4">競賽挑戰</h3>
+            <p className="text-sm md:text-base leading-relaxed">
+              參與各種數學競賽，與同齡人一較高下，激發學習動力，提升解題能力。
+            </p>
+          </div>
+
+          {/* Second Card */}
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
+            <h3 className="text-xl md:text-2xl font-bold mb-4">即時排名</h3>
+            <p className="text-sm md:text-base leading-relaxed">
+              查看即時排行榜，了解自己在全國學生中的排名位置，設定學習目標。
+            </p>
+          </div>
+
+          {/* Third Card */}
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
+            <h3 className="text-xl md:text-2xl font-bold mb-4">獎勵機制</h3>
+            <p className="text-sm md:text-base leading-relaxed">
+              完成挑戰獲得積分和徽章，建立成就感，讓學習變得更有趣。
+            </p>
+          </div>
+        </div>
+      </section>
+    
     </div>
   );
 }
