@@ -1,11 +1,31 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 export default function LandingPage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  
+  const rotatingWords = ["學測", "競賽", "IB", "AP"];
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
+    <ClerkProvider>
     <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
@@ -23,7 +43,7 @@ export default function LandingPage() {
             {/* Features Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-[#2B2B2B] font-medium"
+                className="flex items-center text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors"
                 onClick={() => setActiveDropdown(activeDropdown === 'features' ? null : 'features')}
               >
                 功能特色
@@ -43,7 +63,7 @@ export default function LandingPage() {
             {/* Courses Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-[#2B2B2B] font-medium"
+                className="flex items-center text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors"
                 onClick={() => setActiveDropdown(activeDropdown === 'courses' ? null : 'courses')}
               >
                 課程內容
@@ -60,15 +80,22 @@ export default function LandingPage() {
               )}
             </div>
 
-            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] font-medium">學習支援</a>
-            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] font-medium">關於我們</a>
+            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors">學習支援</a>
+            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors">關於我們</a>
           </div>
 
           {/* Sign In Button */}
-          <div className="flex items-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-              登入
-            </button>
+          <div className="flex items-center gap-2">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                  登入
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </nav>
@@ -80,9 +107,11 @@ export default function LandingPage() {
             {/* Left - Slogan */}
             <div className="lg:ml-12">
               <h1 className="text-5xl font-bold text-[#2B2B2B] mb-6">
-                學測數學，可以很簡單
+                <span className="text-blue-400 transition-all duration-500 ease-in-out">
+                  {rotatingWords[currentWordIndex]}
+                </span>
+                <span className="text-5xl font-bold text-[#2B2B2B] mb-6"> 數學，可以很簡單</span>
                 <br />
-                <span className="text-blue-600"></span>
               </h1>
               <p className="text-xl text-[#2B2B2B] mb-8">
                 真實題庫、智能評分、個人化學習路徑
@@ -90,9 +119,18 @@ export default function LandingPage() {
                 讓數學學習變得更有效率
               </p>
               <div className="flex items-center gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                  立即開始
-                </button>
+                <SignedOut>
+                  <SignUpButton mode="modal">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                      立即開始
+                    </button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                    進入學習
+                  </button>
+                </SignedIn>
                 <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
                   了解更多
                 </button>
@@ -166,5 +204,6 @@ export default function LandingPage() {
         </div>
       </section>
     </div>
+    </ClerkProvider>
   );
 }
