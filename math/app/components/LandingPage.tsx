@@ -1,14 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
 
 export default function LandingPage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -25,7 +17,6 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <ClerkProvider>
     <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
@@ -86,16 +77,9 @@ export default function LandingPage() {
 
           {/* Sign In Button */}
           <div className="flex items-center gap-2">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                  登入
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              登入
+            </button>
           </div>
         </div>
       </nav>
@@ -119,18 +103,9 @@ export default function LandingPage() {
                 讓數學學習變得更有效率
               </p>
               <div className="flex items-center gap-4">
-                <SignedOut>
-                  <SignUpButton mode="modal">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                      立即開始
-                    </button>
-                  </SignUpButton>
-                </SignedOut>
-                <SignedIn>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
-                    進入學習
-                  </button>
-                </SignedIn>
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+                  立即開始
+                </button>
                 <button className="border border-gray-300 hover:border-gray-400 text-[#2B2B2B] px-8 py-3 rounded-lg text-lg font-medium transition-colors">
                   了解更多
                 </button>
@@ -204,6 +179,5 @@ export default function LandingPage() {
         </div>
       </section>
     </div>
-    </ClerkProvider>
   );
 }
