@@ -195,12 +195,11 @@ export default function LandingPage() {
           </div>
 
           {/* Second Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">數學公式快速打</h3>
-            <p className="text-sm md:text-base leading-relaxed">
-              直觀的數學公式輸入法，輕鬆上手，讓你在任何環境解題
-            </p>
-            <AnswerBox/>
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-sky-50 p-6 text-center sm:h-[400px] md:h-[480px] md:p-12">
+            <h3 className="text-xl md:text-2xl font-bold mb-8 text-gray-900">超直觀數學輸入法，輕鬆上手</h3>
+            <p className="text-sm md:text-base leading-relaxed"> 不服來試試 </p>
+            
+            <AnswerBox className="bg-white/80 backdrop-blur-sm w-full max-w-md" showSampleQuestion={false} />
           </div>
 
           {/* Third Card */}

@@ -7,15 +7,17 @@ interface AnswerBoxProps {
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
+  showSampleQuestion?: boolean;
 }
 
 const AnswerBox: React.FC<AnswerBoxProps> = ({ 
   placeholder = "在此寫下您的答案...",
   value = "",
   onChange,
-  className = ""
+  className = "",
+  showSampleQuestion = true
 }) => {
-  const [mathValue, setMathValue] = useState(value);
+  const [mathValue, setMathValue] = useState(value || "\\int_{0}^{\\infty} \\frac{x^2 e^{-x}}{\\sqrt{1 + x^2}} dx = \\frac{\\pi}{2}");
   const [showSymbols, setShowSymbols] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [MathQuill, setMathQuill] = useState<any>(null);
@@ -84,13 +86,13 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
   }
 
   return (
-    <div className={`bg-gray-50 rounded-2xl p-3 mb-3 border border-gray-100 relative overflow-visible ${className}`}>
+    <div className={`bg-white rounded-xl p-2 border border-gray-200 relative overflow-visible ${className}`}>
       {/* MathQuill Input Field */}
       <div className="relative" ref={containerRef}>
         <MathQuill.EditableMathField
           latex={mathValue}
           onChange={handleMathChange}
-          className="w-full bg-transparent text-gray-600 placeholder-gray-400 resize-none outline-none text-sm leading-relaxed min-h-[60px] pr-12"
+          className="w-full bg-transparent text-gray-600 placeholder-gray-400 resize-none outline-none text-sm leading-relaxed min-h-[40px] pr-12"
         />
         
         {/* Math Symbols Button */}
