@@ -84,7 +84,7 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
   }
 
   return (
-    <div className={`bg-gray-50 rounded-2xl p-3 mb-3 border border-gray-100 relative ${className}`}>
+    <div className={`bg-gray-50 rounded-2xl p-3 mb-3 border border-gray-100 relative overflow-visible ${className}`}>
       {/* MathQuill Input Field */}
       <div className="relative" ref={containerRef}>
         <MathQuill.EditableMathField
@@ -105,29 +105,29 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
 
       {/* Math Symbols Panel */}
       {showSymbols && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-300 rounded-xl shadow-lg p-4 z-50 max-h-80">
-          <div className="flex justify-between items-center mb-3 flex-shrink-0">
-            <h3 className="text-sm font-bold text-gray-900">數學符號</h3>
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-300 rounded-xl shadow-lg p-2 z-50 max-h-48 w-full">
+          <div className="flex justify-between items-center mb-1 flex-shrink-0">
+            <h3 className="text-xs font-bold text-gray-900">數學符號</h3>
             <button 
               onClick={() => setShowSymbols(false)}
-              className="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center"
+              className="w-5 h-5 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center"
             >
-              <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
           
-          <div className="overflow-y-auto max-h-60 pr-2">
-            <div className="grid grid-cols-3 gap-2">
+          <div className="overflow-y-auto max-h-36 pr-1">
+            <div className="grid grid-cols-3 gap-1">
               {commonSymbols.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => insertSymbol(item.symbol)}
-                  className="bg-gray-100 hover:bg-blue-200 border border-gray-300 rounded p-2 text-xs text-center transition-colors text-gray-800 font-medium"
+                  className="bg-gray-100 hover:bg-blue-200 border border-gray-300 rounded p-1 text-xs text-center transition-colors text-gray-800 font-medium"
                 >
-                  <div className="font-bold">{item.label}</div>
-                  <div className="text-xs text-gray-600 mt-1">{item.symbol}</div>
+                  <div className="font-bold text-xs">{item.label}</div>
+                  <div className="text-xs text-gray-600 mt-0.5">{item.symbol}</div>
                 </button>
               ))}
             </div>
