@@ -22,7 +22,7 @@ export default function DemoSection({
   backgroundImageAlt
 }: DemoSectionProps) {
   return (
-    <section className="bg-white py-4 md:py-12">
+    <section className="bg-white py-2 md:py-6">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div 
           className="rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-lg relative overflow-hidden"

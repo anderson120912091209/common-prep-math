@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import DemoSection from './DemoSection';
+import LeaderboardPreview from './LeaderboardPreview';
 import { useRouter } from 'next/navigation';
+import MathQuestion from './MathQuestion';
+import AnswerBox from './math/answer-box'
 
 export default function LandingPage() {
   const router = useRouter();
@@ -89,7 +92,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 pb-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
             {/* Left - Slogan */}
@@ -122,9 +125,9 @@ export default function LandingPage() {
                <p className={`text-xl text-[#2B2B2B] mb-8 transition-all duration-1000 ease-out delay-400 transform ${
                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                }`}>
-                 真實題庫、智能評分、個人化學習路徑
+                 真實題庫、智能評分、個人化學習路徑，刺激競賽
                  <br />
-                 讓數學學習變得更有效率
+                 讓數學變的無比簡單
                </p>
                                              <div className={`flex items-center gap-4 transition-all duration-1000 ease-out delay-600 transform ${
                   isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -193,21 +196,25 @@ export default function LandingPage() {
 
           {/* Second Card */}
           <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">即時排名</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4">數學公式快速打</h3>
             <p className="text-sm md:text-base leading-relaxed">
-              查看即時排行榜，了解自己在全國學生中的排名位置，設定學習目標。
+              直觀的數學公式輸入法，輕鬆上手，讓你在任何環境解題
             </p>
+            <AnswerBox/>
           </div>
 
           {/* Third Card */}
           <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">獎勵機制</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4">即時排名</h3>
             <p className="text-sm md:text-base leading-relaxed">
               完成挑戰獲得積分和徽章，建立成就感，讓學習變得更有趣。
             </p>
           </div>
         </div>
       </section>
+
+      {/* Leaderboard Section */}
+      <LeaderboardPreview />
     
     </div>
   );
