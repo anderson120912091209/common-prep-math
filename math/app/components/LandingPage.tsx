@@ -29,7 +29,8 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
+      <div className="relative w-full">
       {/* Navigation Bar */}
       <nav className="bg-white px-6 py-4">
         <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
@@ -222,11 +223,11 @@ export default function LandingPage() {
             />
             
             {/* Capybara - Bottom Right Corner */}
-            <div className="absolute bottom-20 -right-35 z-50">
+            <div className="absolute bottom-20 -right-27 z-50">
               <img 
                 src="/capybara-hi-guitar.png" 
                 alt="Capybara character" 
-                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 scale-120 lg:h-48"
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 scale-90 lg:h-48"
               />
             </div>
           </div>
@@ -237,7 +238,7 @@ export default function LandingPage() {
     
 
       {/* Get Started Footer */}
-      <section className="mt-24 py-16 bg-[#7A9CEB]">
+      <section className="mt-24 py-16 bg-[#7A9CEB] overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -284,7 +285,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-    
+      </div>
     </div>
   );
 }
