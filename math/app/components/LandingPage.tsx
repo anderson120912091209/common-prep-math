@@ -29,8 +29,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      <div className="relative w-full">
+    <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
       <nav className="bg-white px-6 py-4">
         <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
@@ -238,7 +237,7 @@ export default function LandingPage() {
     
 
       {/* Get Started Footer */}
-      <section className="mt-24 py-16 bg-[#7A9CEB] overflow-x-hidden">
+      <section className="mt-24 py-16 bg-[#7A9CEB] overflow-x-visible">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -285,7 +284,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      </div>
+    
     </div>
   );
 }
