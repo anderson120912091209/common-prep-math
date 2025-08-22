@@ -6,6 +6,7 @@ import LeaderboardPreview from './LeaderboardPreview';
 import { useRouter } from 'next/navigation';
 import MathQuestion from './MathQuestion';
 import AnswerBox from './math/answer-box'
+import LeaderboardDashboard from './Leaderboard-Dashboard'
 
 export default function LandingPage() {
   const router = useRouter();
@@ -187,19 +188,25 @@ export default function LandingPage() {
         {/* Right Panel */}
         <div className="mt-6 flex w-full flex-col gap-6 md:mt-0 md:w-2/3 md:gap-12">
           {/* First Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">競賽挑戰</h3>
-            <p className="text-sm md:text-base leading-relaxed">
-              參與各種數學競賽，與同齡人一較高下，激發學習動力，提升解題能力。
-            </p>
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-center place-self-end overflow-hidden rounded-2xl sm:h-[400px] md:h-[480px]">
+            <img 
+              src="/demo-card-1.png" 
+              alt="Competition challenge demo" 
+              className="w-full h-auto object-contain"
+            />
           </div>
 
           {/* Second Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-sky-50 p-6 text-center sm:h-[400px] md:h-[480px] md:p-12">
-            <h3 className="text-xl md:text-2xl font-bold mb-8 text-gray-900">超直觀數學輸入法，輕鬆上手</h3>
-            <p className="text-sm md:text-base leading-relaxed"> 不服來試試 </p>
-            
-            <AnswerBox className="bg-white/80 backdrop-blur-sm w-full max-w-md" showSampleQuestion={false} />
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-center place-self-end overflow-hidden rounded-2xl sm:h-[400px] md:h-[480px]">
+            <img 
+              src="/demo-card-2.png" 
+              alt="Super fast input method demo" 
+              className="w-full h-auto object-contain"
+            />
+            {/* AnswerBox positioned over the white input area */}
+            <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md">
+              <AnswerBox className="bg-white border-2 border-gray-300 shadow-lg" showSampleQuestion={false} />
+            </div>
           </div>
 
           {/* Third Card */}
@@ -213,7 +220,7 @@ export default function LandingPage() {
       </section>
 
       {/* Leaderboard Section */}
-      <LeaderboardPreview />
+      <LeaderboardDashboard />
 
       {/* Get Started Footer */}
       <section className="mt-24 py-16 bg-[#7A9CEB]">
