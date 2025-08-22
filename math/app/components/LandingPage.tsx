@@ -189,12 +189,21 @@ export default function LandingPage() {
         {/* Right Panel */}
         <div className="mt-6 flex w-full flex-col gap-6 md:mt-0 md:w-2/3 md:gap-12">
           {/* First Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-center place-self-end overflow-hidden rounded-2xl sm:h-[400px] md:h-[480px]">
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-center place-self-end overflow-visible rounded-2xl sm:h-[400px] md:h-[480px]">
             <img 
-              src="/demo-card-1.png" 
+              src="/card-1-demo.png" 
               alt="Competition challenge demo" 
               className="w-full h-auto object-contain"
             />
+            
+            {/* Rabbit in Motion - Bottom Right Corner */}
+            <div className="absolute bottom-4 -right-25 z-50">
+              <img 
+                src="/rabbit-in-motion.png" 
+                alt="Rabbit character in motion" 
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 scale-120 lg:h-48"
+              />
+            </div>
           </div>
 
           {/* Second Card */}
@@ -205,11 +214,20 @@ export default function LandingPage() {
           </div>
 
           {/* Third Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-hidden rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
+          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-start gap-3 place-self-end overflow-visible rounded-2xl bg-gray-900 p-6 text-center text-white sm:h-[400px] md:h-[480px] md:p-12">
             <h3 className="text-xl md:text-2xl font-bold mb-4">即時排名</h3>
             <p className="text-sm md:text-base leading-relaxed">
               完成挑戰獲得積分和徽章，建立成就感，讓學習變得更有趣。
             </p>
+            
+            {/* Capybara - Bottom Right Corner */}
+            <div className="absolute bottom-5 -right-35 z-50">
+              <img 
+                src="/capybara-hi-guitar.png" 
+                alt="Capybara character" 
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 scale-120 lg:h-48"
+              />
+            </div>
           </div>
         </div>
       </section>

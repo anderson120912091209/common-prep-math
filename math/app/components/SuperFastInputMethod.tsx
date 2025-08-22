@@ -15,8 +15,8 @@ const SuperFastInputMethod: React.FC<SuperFastInputMethodProps> = ({
     <div className={`bg-[#E6E6FA] rounded-3xl flex flex-col items-center 
     justify-start pt-8 h-100 overflow-visible ${className}`}>
       {/* Japanese Title */}
-      <h2 className="text-[#2B2B2B] text-6xl 
-      md:text-6xl font-bold mb-4 text-center">
+      <h2 className="text-[#2B2B2B] text-7xl 
+      md:text-7xl font-bold mb-4 text-center tracking-wide">
         超快輸入法
       </h2>
       
