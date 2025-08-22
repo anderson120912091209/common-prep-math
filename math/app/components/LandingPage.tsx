@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import MathQuestion from './MathQuestion';
 import AnswerBox from './math/answer-box'
 import LeaderboardDashboard from './Leaderboard-Dashboard'
+import SuperFastInputMethod from './SuperFastInputMethod'
 
 export default function LandingPage() {
   const router = useRouter();
@@ -197,16 +198,10 @@ export default function LandingPage() {
           </div>
 
           {/* Second Card */}
-          <div className="relative flex h-[360px] w-full max-w-2xl flex-col items-center justify-center place-self-end overflow-hidden rounded-2xl sm:h-[400px] md:h-[480px]">
-            <img 
-              src="/demo-card-2.png" 
-              alt="Super fast input method demo" 
-              className="w-full h-auto object-contain"
-            />
-            {/* AnswerBox positioned over the white input area */}
-            <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md">
-              <AnswerBox className="bg-white border-2 border-gray-300 shadow-lg" showSampleQuestion={false} />
-            </div>
+          <div className="relative flex h-[260px] w-full max-w-2xl 
+          flex-col items-center justify-center place-self-end overflow-hidden 
+          rounded-2xl sm:h-[260px] md:h-[360px]">
+            <SuperFastInputMethod className="w-full h-full" />
           </div>
 
           {/* Third Card */}
