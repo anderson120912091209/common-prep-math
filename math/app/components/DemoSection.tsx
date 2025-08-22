@@ -25,9 +25,9 @@ export default function DemoSection({
     <section className="bg-white py-2 md:py-6">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div 
-          className="rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-lg relative overflow-hidden"
+          className="rounded-2xl md:rounded-3xl p-6 md:p-12 relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #f1f3f8 0%, #e8f0fe 50%, #dce7f7 100%)'
+            background: '#DBEAFE'
           }}
         >
           {/* Background image positioned in the red circled area - top-right corner */}
@@ -67,7 +67,7 @@ export default function DemoSection({
 
                 <div className="pt-2">
                   <button 
-                    className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-medium transition-colors text-sm md:text-base shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-medium transition-colors text-sm md:text-base transform hover:scale-105 transition-all duration-200"
                     onClick={onButtonClick}
                   >
                     {buttonText}
