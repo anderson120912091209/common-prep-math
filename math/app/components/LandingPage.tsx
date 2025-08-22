@@ -199,7 +199,7 @@ export default function LandingPage() {
 
           {/* Second Card */}
           <div className="relative flex h-[260px] w-full max-w-2xl 
-          flex-col items-center justify-center place-self-end overflow-hidden 
+          flex-col items-center justify-center place-self-end overflow-visible 
           rounded-2xl sm:h-[260px] md:h-[360px]">
             <SuperFastInputMethod className="w-full h-full" />
           </div>
