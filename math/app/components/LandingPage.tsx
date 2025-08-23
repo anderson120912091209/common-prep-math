@@ -1,18 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import DemoSection from './DemoSection';
 import { useRouter } from 'next/navigation';
 import MathQuestion from './MathQuestion';
 import AnswerBox from './math/answer-box'
 import LeaderboardDashboard from './Leaderboard-Dashboard'
 import SuperFastInputMethod from './SuperFastInputMethod'
+import MathProgressTracker from './MathProgressTracker'
 
 export default function LandingPage() {
   const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Animation states for different sections
+  const [animateDemo, setAnimateDemo] = useState(false);
+  const [animateCards, setAnimateCards] = useState(false);
+  const [animatePrograms, setAnimatePrograms] = useState(false);
+  const [animateProgress, setAnimateProgress] = useState(false);
+  
+  // Refs for intersection observer
+  const demoRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const programsRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   
   const rotatingWords = ["學測", "國中", "競賽", "微積分", "統計", "幾何"];
   
@@ -25,6 +39,44 @@ export default function LandingPage() {
     }, 2000);
     
     return () => clearInterval(interval);
+  }, []);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const targetId = entry.target.getAttribute('data-section');
+          switch (targetId) {
+            case 'demo':
+              setAnimateDemo(true);
+              break;
+            case 'cards':
+              setAnimateCards(true);
+              break;
+            case 'programs':
+              setAnimatePrograms(true);
+              break;
+            case 'progress':
+              setAnimateProgress(true);
+              break;
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    if (demoRef.current) observer.observe(demoRef.current);
+    if (cardsRef.current) observer.observe(cardsRef.current);
+    if (programsRef.current) observer.observe(programsRef.current);
+    if (progressRef.current) observer.observe(progressRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -83,11 +135,11 @@ export default function LandingPage() {
             <a href="/about" className="text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors">關於我們</a>
           </div>
 
-          {/* Sign In Button */}
+          {/* Join Waitlist Button */}
           <div className="flex items-center gap-2">
-            <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-2 rounded-lg font-medium transition-colors">
-              登入
-            </button>
+            <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              加入等待名單
+            </Link>
           </div>
         </div>
       </nav>
@@ -160,22 +212,40 @@ export default function LandingPage() {
       </section>
 
       {/* Demo Section */}
-      <DemoSection
-        title="真實的考試體驗"
-        description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
-        imageSrc="/demo3.png"
-        imageAlt="Math Question Demo"
-        buttonText="開始練習"
-        backgroundImageSrc=""
-        backgroundImageAlt="Math elements"
-        onButtonClick={() => {
-          // Handle button click
-          console.log('Demo section button clicked');
-        }}
-      />
+      <div 
+        ref={demoRef}
+        data-section="demo"
+        className={`transition-all duration-1000 ease-out ${
+          animateDemo 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <DemoSection
+          title="真實的考試體驗"
+          description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
+          imageSrc="/demo3.png"
+          imageAlt="Math Question Demo"
+          buttonText="開始練習"
+          backgroundImageSrc=""
+          backgroundImageAlt="Math elements"
+          onButtonClick={() => {
+            // Handle button click
+            console.log('Demo section button clicked');
+          }}
+        />
+      </div>
 
       {/* Split Screen Section */}
-      <section className="relative mt-24 flex w-full max-w-7xl flex-col gap-6 px-6 md:flex-row md:px-12 mx-auto">
+      <section 
+        ref={cardsRef}
+        data-section="cards"
+        className={`relative mt-24 flex w-full max-w-7xl flex-col gap-6 px-6 md:flex-row md:px-12 mx-auto transition-all duration-1000 ease-out ${
+          animateCards 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-10'
+        }`}
+      >
         {/* Left Panel */}
         <div className="md:w-1/3">
           <div className="sticky left-1/2 top-1/2">
@@ -233,7 +303,15 @@ export default function LandingPage() {
       </section>
 
       {/* Mathematics Programs Section */}
-      <section className="mt-24 py-16">
+      <section 
+        ref={programsRef}
+        data-section="programs"
+        className={`mt-24 py-16 transition-all duration-1000 ease-out ${
+          animatePrograms 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* Header */}
           <div className="text-center mb-12">
@@ -423,6 +501,41 @@ export default function LandingPage() {
                 <span className="text-[#7A9CEB]">Mathy Official</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Progress Tracker Section */}
+      <section 
+        ref={progressRef}
+        data-section="progress"
+        className={`py-16 bg-gray-50 transition-all duration-1000 ease-out ${
+          animateProgress 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#2B2B2B] mb-6">
+              追蹤你的學習進度
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              像 GitHub 追蹤程式碼貢獻一樣，我們追蹤你的數學練習進度。每天解決問題，建立你的學習熱度圖！
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <MathProgressTracker className="max-w-4xl" />
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-gray-600 mb-4">
+              堅持每天練習，讓數學成為你的強項
+            </p>
+            <button className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-8 py-3 rounded-lg font-medium transition-colors">
+              開始追蹤進度
+            </button>
           </div>
         </div>
       </section>
