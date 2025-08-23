@@ -21,7 +21,7 @@ const SuperFastInputMethod: React.FC<SuperFastInputMethodProps> = ({
       </h2>
       
       {/* Input Field */}
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md mx-auto flex justify-center">
         <AnswerBox/>        
       </div>
       <div className="mt-4 text-center">
