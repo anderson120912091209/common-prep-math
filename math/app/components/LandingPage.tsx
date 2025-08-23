@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import DemoSection from './DemoSection';
-import LeaderboardPreview from './LeaderboardPreview';
 import { useRouter } from 'next/navigation';
 import MathQuestion from './MathQuestion';
 import AnswerBox from './math/answer-box'
@@ -237,7 +236,7 @@ export default function LandingPage() {
     
 
       {/* Get Started Footer */}
-      <section className="mt-24 py-16 bg-[#7A9CEB] overflow-x-visible">
+      <section className="mt-24 py-16 bg-[#7A9CEB] overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">

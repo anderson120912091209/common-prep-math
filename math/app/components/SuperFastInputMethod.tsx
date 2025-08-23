@@ -25,10 +25,13 @@ const SuperFastInputMethod: React.FC<SuperFastInputMethodProps> = ({
         <AnswerBox/>        
       </div>
       <div className="mt-4 text-center">
-        <p className="text-sm md:text-base leading-relaxed
-        text-gray-600 font-bold border-l-4 border-[#7A9CEB] pl-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-r-lg shadow-sm">
+        <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-lg shadow-lg border border-white/50">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <p className="text-sm md:text-base font-semibold text-[#2B2B2B]">
             比 LaTeX 直觀的輸入法，快速地打出你像要的數學公式。
-        </p>
+          </p>
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+        </div>
       </div>
       
       {/* Owl in Motion - Bottom Right Corner */}
