@@ -233,25 +233,24 @@ export default function LandingPage() {
       </section>
 
       {/* Mathematics Programs Section */}
-      <section className="mt-24 py-16 bg-gray-50">
+      <section className="mt-24 py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-[#2B2B2B] mb-6">
-              數學課程市場
+              任何等級的數學，我們都有
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               我們提供多樣化的數學課程，從基礎到進階，讓您根據自己的需求選擇最適合的學習路徑。
             </p>
-            <a href="#" className="text-[#7A9CEB] hover:text-[#6B8CD9] underline text-lg font-medium transition-colors">
-              了解更多課程
-            </a>
+            
           </div>
 
           {/* Programs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* 學測A */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-[#7A9CEB] rounded-lg flex items-center justify-center">
@@ -278,7 +277,8 @@ export default function LandingPage() {
             </div>
 
             {/* 學測B */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
@@ -305,7 +305,8 @@ export default function LandingPage() {
             </div>
 
             {/* 微積分 */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
@@ -334,7 +335,8 @@ export default function LandingPage() {
             </div>
 
             {/* 統計學 */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
@@ -363,7 +365,8 @@ export default function LandingPage() {
             </div>
 
             {/* 線性代數 */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
@@ -392,7 +395,8 @@ export default function LandingPage() {
             </div>
 
             {/* 競賽數學 */}
-            <div className="bg-white rounded-xl p-6 cursor-pointer group">
+            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
+            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center">

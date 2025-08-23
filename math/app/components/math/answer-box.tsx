@@ -86,7 +86,7 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
   }
 
   return (
-    <div className={`bg-white rounded-xl p-2 border border-gray-200 relative overflow-visible ${className}`}>
+    <div className={`bg-white rounded-xl p-2 border-6 border-gray-500 relative overflow-visible ${className}`}>
       {/* MathQuill Input Field */}
       <div className="relative" ref={containerRef}>
         <MathQuill.EditableMathField
@@ -99,9 +99,10 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
         <button
           type="button"
           onClick={() => setShowSymbols(!showSymbols)}
-          className="absolute top-2 right-2 bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded-lg text-xs font-medium transition-colors"
+          className="absolute top-2 
+          border-blue-300 border-2 right-2 bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded-lg text-xs font-medium transition-colors"
         >
-          fx
+          f(x)
         </button>
       </div>
 
