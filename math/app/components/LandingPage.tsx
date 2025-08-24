@@ -13,6 +13,7 @@ import MathProgressTracker from './MathProgressTracker'
 export default function LandingPage() {
   const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   
@@ -82,31 +83,38 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
-      <nav className="bg-white px-6 py-4">
-        <div className="max-w-7xl mx-auto px-20 relative flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <img src="/logo2.svg" alt="Mathy Logo" className="h-10 w-auto" />
-          </div>
-
-          {/* Middle Navigation */}
-          <div className="flex items-center space-x-8">
+      <nav className="bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200/50 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link href="/" className="text-xl sm:text-2xl font-bold text-[#7A9CEB]">
+            <img src="/logo2.svg" alt="Mathy" className="w-90 sm:w-90 md:w-80 lg:w-90 h-10 sm:h-10 md:h-10 lg:h-10" />
+          </Link>
+          <div className="hidden sm:flex items-center gap-4 md:gap-6">
+            <Link href="/" className="text-sm md:text-base text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer">
+              首頁
+            </Link>
+            
             {/* Features Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors"
+                className="flex items-center text-sm md:text-base text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer"
                 onClick={() => setActiveDropdown(activeDropdown === 'features' ? null : 'features')}
               >
                 功能特色
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               {activeDropdown === 'features' && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">真實題庫</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">AI 智能評分</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">詳細解答</a>
+                <div className="absolute top-full left-0 mt-2 w-40 sm:w-48 bg-white rounded-lg shadow-md border border-gray-100 py-2 z-50">
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    真實題庫
+                  </a>
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    AI 智能評分
+                  </a>
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    詳細解答
+                  </a>
                 </div>
               )}
             </div>
@@ -114,34 +122,110 @@ export default function LandingPage() {
             {/* Courses Dropdown */}
             <div className="relative">
               <button 
-                className="flex items-center text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors"
+                className="flex items-center text-sm md:text-base text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer"
                 onClick={() => setActiveDropdown(activeDropdown === 'courses' ? null : 'courses')}
               >
                 課程內容
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               {activeDropdown === 'courses' && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">數學 A</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">數學 B</a>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">模擬考試</a>
+                <div className="absolute top-full left-0 mt-2 w-40 sm:w-48 bg-white rounded-lg shadow-md border border-gray-100 py-2 z-50">
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    數學 A
+                  </a>
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    數學 B
+                  </a>
+                  <a href="#" className="block px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-[#7A9CEB] transition-colors duration-150">
+                    模擬考試
+                  </a>
                 </div>
               )}
             </div>
 
-            <a href="#" className="text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors">學習支援</a>
-            <a href="/about" className="text-gray-700 hover:text-[#2B2B2B] hover:bg-gray-100 rounded-full px-3 py-2 font-medium transition-colors">關於我們</a>
-          </div>
-
-          {/* Join Waitlist Button */}
-          <div className="flex items-center gap-2">
-            <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-6 py-2 rounded-lg font-medium transition-colors">
+            <Link href="/about" className="text-sm md:text-base text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer">
+              關於我們
+            </Link>
+            <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-3 sm:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">
               加入等待名單
             </Link>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            className="sm:hidden p-2 text-gray-600 hover:text-[#7A9CEB] transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
+        
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="sm:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50">
+            <div className="px-4 py-3 space-y-3">
+              <Link 
+                href="/" 
+                className="block text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                首頁
+              </Link>
+              
+              {/* Mobile Features Section */}
+              <div className="border-t border-gray-100 pt-3">
+                <div className="text-sm font-medium text-gray-900 mb-2">功能特色</div>
+                <div className="pl-4 space-y-2">
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    真實題庫
+                  </a>
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    AI 智能評分
+                  </a>
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    詳細解答
+                  </a>
+                </div>
+              </div>
+              
+              {/* Mobile Courses Section */}
+              <div className="border-t border-gray-100 pt-3">
+                <div className="text-sm font-medium text-gray-900 mb-2">課程內容</div>
+                <div className="pl-4 space-y-2">
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    數學 A
+                  </a>
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    數學 B
+                  </a>
+                  <a href="#" className="block text-sm text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 py-1">
+                    模擬考試
+                  </a>
+                </div>
+              </div>
+              
+              <Link 
+                href="/about" 
+                className="block text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer py-2 border-t border-gray-100 pt-3"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                關於我們
+              </Link>
+              
+              <Link 
+                href="/waitlist" 
+                className="block bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-4 py-3 rounded-lg font-medium transition-colors text-center mt-4"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                加入等待名單
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -221,19 +305,19 @@ export default function LandingPage() {
             : 'opacity-0 translate-y-10'
         }`}
       >
-        <DemoSection
-          title="真實的考試體驗"
-          description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
-          imageSrc="/demo3.png"
-          imageAlt="Math Question Demo"
-          buttonText="開始練習"
-          backgroundImageSrc=""
-          backgroundImageAlt="Math elements"
-          onButtonClick={() => {
-            // Handle button click
-            console.log('Demo section button clicked');
-          }}
-        />
+      <DemoSection
+        title="真實的考試體驗"
+        description="我們的平台提供完全仿真的數學考試環境，讓您在熟悉的介面中練習，提升考試表現。"
+        imageSrc="/demo3.png"
+        imageAlt="Math Question Demo"
+        buttonText="開始練習"
+        backgroundImageSrc=""
+        backgroundImageAlt="Math elements"
+        onButtonClick={() => {
+          // Handle button click
+          console.log('Demo section button clicked');
+        }}
+      />
       </div>
 
       {/* Split Screen Section */}
@@ -249,8 +333,13 @@ export default function LandingPage() {
         {/* Left Panel */}
         <div className="md:w-1/3">
           <div className="sticky left-1/2 top-1/2">
-            <h2 className="font-bold text-[#2B2B2B] text-3xl md:text-4xl leading-tight">
-              透過有趣，刺激的競賽學習任何等級的數學
+            <h2 className="font-bold text-[#2B2B2B] text-4xl 
+            text-center md:text-4xl leading-tight">
+              透過有趣，刺激的競賽
+              <br />
+              <span className="font-bold text-[#2B2B2B] text-4xl">學習</span>
+              <span className="text-[#6B8CD9]">任何等級</span>
+              <span className="font-bold text-[#2B2B2B] text-4xl">的數學</span>
             </h2>
           </div>
         </div>
@@ -509,7 +598,7 @@ export default function LandingPage() {
       <section 
         ref={progressRef}
         data-section="progress"
-        className={`py-16 bg-gray-50 transition-all duration-1000 ease-out ${
+        className={`py-16 bg-white transition-all duration-1000 ease-out ${
           animateProgress 
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 translate-y-10'

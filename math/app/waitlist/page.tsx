@@ -14,17 +14,22 @@ export default function WaitlistPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Navigation Bar */}
-      <nav className="bg-white/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <img src="/logo2.svg" alt="Mathy Logo" className="h-8 w-auto" />
+      <nav className="bg-white/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold text-[#7A9CEB]">
+            <img src="/logo2.svg" alt="Mathy" className="w-90 h-10" />
           </Link>
-          <Link 
-            href="/" 
-            className="text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors"
-          >
-            返回首頁
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/" className="text-gray-600 hover:text-[#7A9CEB] transition-colors">
+              首頁
+            </Link>
+            <Link href="/about" className="text-gray-600 hover:text-[#7A9CEB] transition-colors">
+              關於我們
+            </Link>
+            <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-4 py-2 rounded-lg font-medium transition-colors">
+              加入等待名單
+            </Link>
+          </div>
         </div>
       </nav>
 
