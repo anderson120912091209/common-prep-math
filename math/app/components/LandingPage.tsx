@@ -9,6 +9,7 @@ import AnswerBox from './math/answer-box'
 import LeaderboardDashboard from './Leaderboard-Dashboard'
 import SuperFastInputMethod from './SuperFastInputMethod'
 import MathProgressTracker from './MathProgressTracker'
+import ProgramCard from './ProgramCard'
 
 export default function LandingPage() {
   const router = useRouter();
@@ -415,181 +416,83 @@ export default function LandingPage() {
 
           {/* Programs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* 學測A */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#7A9CEB] rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">A</span>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">學測A</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                大學學測數學A，涵蓋代數、幾何、統計等核心概念，適合理工科系考生。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>2,847 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
-
-            {/* 學測B */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">B</span>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">學測B</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                大學學測數學B，專注於統計與機率，適合商管、社會科學等科系考生。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>1,923 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
-
-            {/* 微積分 */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">微積分</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                大學微積分課程，包含極限、導數、積分等核心概念，適合理工科系學生。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>3,456 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
-
-            {/* 統計學 */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">統計學</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                統計學基礎課程，涵蓋描述統計、推論統計、機率論等實用概念。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>2,134 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
-
-            {/* 線性代數 */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">線性代數</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                線性代數基礎課程，包含向量、矩陣、特徵值等核心概念。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>1,876 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
-
-            {/* 競賽數學 */}
-            <div className="bg-white hover:bg-zinc-100 transition-all duration-200 
-            rounded-xl border-4 border-zinc-300 p-6 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[#2B2B2B] font-bold text-xl">競賽數學</h3>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-[#7A9CEB] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">
-                數學競賽專項訓練，包含奧林匹克數學、AMC等競賽題型解析。
-              </p>
-              <div className="flex items-center justify-between text-gray-500 text-sm">
-                <div className="flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>956 學生</span>
-                </div>
-                <span className="text-[#7A9CEB]">Mathy Official</span>
-              </div>
-            </div>
+            <ProgramCard
+              title="學測A"
+              description="大學學測數學A，涵蓋代數、幾何、統計等核心概念，適合理工科系考生。"
+              difficulty="中等"
+              difficultyColor="text-green-600"
+              difficultyBgColor="bg-green-100"
+              level="適合高中程度"
+              studentCount="2,847"
+              imageSrc="/demo-card-1.png"
+              gradientFrom="blue-400"
+              gradientTo="blue-600"
+            />
+            
+            <ProgramCard
+              title="學測B"
+              description="大學學測數學B，專注於統計與機率，適合商管、社會科學等科系考生。"
+              difficulty="基礎"
+              difficultyColor="text-blue-600"
+              difficultyBgColor="bg-blue-100"
+              level="適合高中程度"
+              studentCount="1,923"
+              imageSrc="/demo-card-1.png"
+              gradientFrom="green-400"
+              gradientTo="green-600"
+            />
+            
+            <ProgramCard
+              title="微積分"
+              description="大學微積分課程，包含極限、導數、積分等核心概念，適合理工科系學生。"
+              difficulty="進階"
+              difficultyColor="text-orange-600"
+              difficultyBgColor="bg-orange-100"
+              level="適合大學程度"
+              studentCount="3,456"
+              imageSrc="/calculus.png"
+              gradientFrom="purple-400"
+              gradientTo="purple-600"
+            />
+            
+            <ProgramCard
+              title="統計學"
+              description="統計學基礎課程，涵蓋描述統計、推論統計、機率論等實用概念。"
+              difficulty="中等"
+              difficultyColor="text-green-600"
+              difficultyBgColor="bg-green-100"
+              level="適合大學程度"
+              studentCount="2,134"
+              imageSrc="/demo-card-3.png"
+              gradientFrom="orange-400"
+              gradientTo="orange-600"
+            />
+            
+            <ProgramCard
+              title="線性代數"
+              description="線性代數基礎課程，包含向量、矩陣、特徵值等核心概念。"
+              difficulty="進階"
+              difficultyColor="text-orange-600"
+              difficultyBgColor="bg-orange-100"
+              level="適合大學程度"
+              studentCount="1,876"
+              imageSrc="/linearalg.png"
+              gradientFrom="red-400"
+              gradientTo="red-600"
+            />
+            
+            <ProgramCard
+              title="競賽數學"
+              description="數學競賽專項訓練，包含奧林匹克數學、AMC等競賽題型解析。"
+              difficulty="專家"
+              difficultyColor="text-red-600"
+              difficultyBgColor="bg-red-100"
+              level="適合競賽程度"
+              studentCount="956"
+              imageSrc="/demo3.png"
+              gradientFrom="yellow-400"
+              gradientTo="yellow-600"
+            />
           </div>
         </div>
       </section>
@@ -658,9 +561,15 @@ export default function LandingPage() {
                         onClick={() => router.push('/waitlist')}
                         className="bg-white 
                         border border-white
-                        text-[#7A9CEB] hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors w-full sm:w-auto"
+                        text-[#7A9CEB] px-4 border border-white py-2 rounded-lg font-medium 
+                        transition-colors w-full sm:w-auto flex items-center gap-2"
                       >
-                       加入等待名單
+                        <img 
+                          src="/reverse-logo1.png" 
+                          alt="Mathy Logo" 
+                          className="w-8 h-8"
+                        />
+                        加入等待名單
                       </button>
                       <button className="border border-white 
                       text-white hover:bg-white hover:text-[#7A9CEB] 

@@ -203,14 +203,14 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white px-6 py-4 border-b border-gray-100">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
+      <nav className="bg-white px-6 py-4 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <img src="/logo2.svg" alt="Mathy Logo" className="h-8 w-auto" />
+            <img src="/logo2.svg" alt="Mathy Logo" className="h-10 w-auto" />
           </Link>
-          <div className="flex items-center gap-6">
-            <span className="text-sm text-gray-500 font-medium">
-              {currentStep} / 4
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-500">
+              步驟 {currentStep} / 4
             </span>
             <Link href="/" className="text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors">
               返回首頁
@@ -220,40 +220,41 @@ export default function OnboardingPage() {
       </nav>
 
       {/* Progress Bar */}
-      <div className="bg-gray-50 h-1">
+      <div className="bg-gray-100 h-2">
         <div 
-          className="bg-[#7A9CEB] h-1 transition-all duration-700 ease-out"
+          className="bg-[#7A9CEB] h-2 transition-all duration-500 ease-out"
           style={{ width: `${(currentStep / 4) * 100}%` }}
         ></div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-3xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="max-w-2xl mx-auto">
           {/* Step 1: Math Interests */}
           {currentStep === 1 && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold text-[#2B2B2B] leading-tight">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-[#2B2B2B] mb-4">
                   您想學習哪些數學領域？
                 </h1>
-                <p className="text-lg text-gray-600 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600">
                   選擇您感興趣的數學領域，我們將為您推薦相關的學習內容
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {mathFields.map((field) => (
                   <button
                     key={field.id}
                     onClick={() => handleMathInterestToggle(field.id)}
-                    className={`p-6 rounded-xl border transition-all duration-200 text-left ${
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
                       onboardingData.mathInterests.includes(field.id)
-                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/5 shadow-sm'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/10'
+                        : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-semibold text-[#2B2B2B] text-base">
+                    <div className="text-2xl mb-2">{field.icon}</div>
+                    <div className="text-sm font-medium text-[#2B2B2B]">
                       {field.label}
                     </div>
                   </button>
@@ -264,31 +265,31 @@ export default function OnboardingPage() {
 
           {/* Step 2: Current Level */}
           {currentStep === 2 && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold text-[#2B2B2B] leading-tight">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-[#2B2B2B] mb-4">
                   您目前的數學程度如何？
                 </h1>
-                <p className="text-lg text-gray-600 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600">
                   這將幫助我們為您提供適合的學習內容
                 </p>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {currentLevels.map((level) => (
                   <button
                     key={level.id}
                     onClick={() => handleLevelSelect(level.id)}
-                    className={`w-full p-6 rounded-xl border transition-all duration-200 text-left ${
+                    className={`w-full p-6 rounded-xl border-2 text-left transition-all duration-200 ${
                       onboardingData.currentLevel === level.id
-                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/5 shadow-sm'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/10'
+                        : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="font-semibold text-lg text-[#2B2B2B] mb-1">
                       {level.label}
                     </div>
-                    <div className="text-gray-600 text-sm">
+                    <div className="text-gray-600">
                       {level.description}
                     </div>
                   </button>
@@ -299,31 +300,31 @@ export default function OnboardingPage() {
 
           {/* Step 3: Study Time */}
           {currentStep === 3 && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold text-[#2B2B2B] leading-tight">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-[#2B2B2B] mb-4">
                   您每天可以投入多少時間學習？
                 </h1>
-                <p className="text-lg text-gray-600 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600">
                   這將幫助我們制定適合您的學習計劃
                 </p>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {studyTimes.map((time) => (
                   <button
                     key={time.id}
                     onClick={() => handleStudyTimeSelect(time.id)}
-                    className={`w-full p-6 rounded-xl border transition-all duration-200 text-left ${
+                    className={`w-full p-6 rounded-xl border-2 text-left transition-all duration-200 ${
                       onboardingData.studyTime === time.id
-                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/5 shadow-sm'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                        ? 'border-[#7A9CEB] bg-[#7A9CEB]/10'
+                        : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="font-semibold text-lg text-[#2B2B2B] mb-1">
                       {time.label}
                     </div>
-                    <div className="text-gray-600 text-sm">
+                    <div className="text-gray-600">
                       {time.description}
                     </div>
                   </button>
@@ -334,12 +335,12 @@ export default function OnboardingPage() {
 
           {/* Step 4: Learning Goals */}
           {currentStep === 4 && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold text-[#2B2B2B] leading-tight">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-[#2B2B2B] mb-4">
                   您的學習目標是什麼？
                 </h1>
-                <p className="text-lg text-gray-600 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600">
                   告訴我們您希望通過學習數學達到什麼目標
                 </p>
               </div>
@@ -349,7 +350,7 @@ export default function OnboardingPage() {
                   value={onboardingData.learningGoals}
                   onChange={(e) => handleGoalsChange(e.target.value)}
                   placeholder="例如：我想在學測中取得好成績、我想參加數學競賽、我想提升邏輯思維能力..."
-                  className="w-full p-6 rounded-xl border border-gray-200 focus:border-[#7A9CEB] focus:ring-2 focus:ring-[#7A9CEB]/10 outline-none transition-all resize-none text-base"
+                  className="w-full p-6 rounded-xl border-2 border-gray-200 focus:border-[#7A9CEB] focus:ring-2 focus:ring-[#7A9CEB]/20 outline-none transition-all resize-none"
                   rows={6}
                 />
               </div>
@@ -357,11 +358,11 @@ export default function OnboardingPage() {
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between items-center mt-16 pt-8 border-t border-gray-100">
+          <div className="flex justify-between items-center mt-12">
             <button
               onClick={handleBack}
               disabled={currentStep === 1}
-              className="px-8 py-3 text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {currentStep === 1 ? '返回' : '上一步'}
             </button>
@@ -369,7 +370,7 @@ export default function OnboardingPage() {
             <button
               onClick={handleNext}
               disabled={!canProceed() || submitting}
-              className="px-10 py-3 bg-[#7A9CEB] hover:bg-[#6B8CD9] disabled:bg-gray-300 text-white rounded-lg font-medium transition-all duration-200 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+              className="px-8 py-3 bg-[#7A9CEB] hover:bg-[#6B8CD9] disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors disabled:cursor-not-allowed"
             >
               {submitting ? '處理中...' : currentStep === 4 ? '完成' : '下一步'}
             </button>
