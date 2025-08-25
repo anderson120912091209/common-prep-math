@@ -633,43 +633,41 @@ export default function LandingPage() {
       <section className="mt-24 py-16 bg-white">
         <div className="max-w-7xl mx-auto px-2 md:px-4">
                     <div className="bg-cover bg-center bg-no-repeat rounded-2xl p-40 
-           md:p-40" style={{ backgroundImage: 'url(/lavender-field-animals.png)' }}>
+           md:p-40" style={{ backgroundImage: 'url(/lavender-small-1.png)' }}>
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 準備好開始你的數學之旅了嗎？
               </h2>
-              <p className="text-xl text-white/90 max-w-2xl mx-auto">
-                加入我們的學習社群，與這些可愛的夥伴一起探索數學的奧秘
+              <p className="text-lg text-white/90 max-w-2xl mx-auto">
+                加入我們，與數千名學生一起，在有趣的挑戰中提升數學能力
               </p>
             </div>
 
             <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
               {/* Animal Groups Image */}
               <div className="max-w-sm -mt-4">
-
+                <div className="w-full h-40"></div>
               </div>
 
               {/* CTA Content */}
-              <div className="text-center max-w-md">
+              <div className="text-left max-w-md">
                 <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-white">
-                    立即加入，開始學習
-                  </h3>
-                  <p className="text-white/90">
-                    與數千名學生一起，在有趣的競賽中提升數學能力。
-                  </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button 
-                      onClick={() => router.push('/waitlist')}
-                      className="bg-white text-[#7A9CEB] hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors"
-                    >
-                      免費開始
-                    </button>
-                    <button className="border border-white text-white hover:bg-white hover:text-[#7A9CEB] px-8 py-3 rounded-lg font-medium transition-colors">
-                      了解更多
-                    </button>
-                  </div>
+                           <div className="flex flex-col sm:flex-row gap-4 justify-start items-center">
+                      <button 
+                        onClick={() => router.push('/waitlist')}
+                        className="bg-white 
+                        border border-white
+                        text-[#7A9CEB] hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors w-full sm:w-auto"
+                      >
+                       加入等待名單
+                      </button>
+                      <button className="border border-white 
+                      text-white hover:bg-white hover:text-[#7A9CEB] 
+                      backdrop-blur-md bg-white/10 px-8 py-3 rounded-lg font-medium transition-colors w-full sm:w-auto">
+                       了解更多
+                      </button>
+                    </div>
                 </div>
               </div>
             </div>
