@@ -241,7 +241,7 @@ export default function LandingPage() {
                  <span className="flex items-center justify-center rounded-full bg-[#7A9CEB] px-3 py-1 text-center text-white">
                    最新消息
                  </span>
-                 <a href="#" className="flex items-center font truncate underline-offset-2 transition-all">
+                 <a href="/waitlist" className="flex items-center font truncate underline-offset-2 transition-all">
                    Beta 測試版本將由 9/20 發行，加入測試名單
                    <svg className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1" 
                    fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -9,6 +9,7 @@ export default function WaitlistSuccessPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     const handleAuthCallback = async () => {
@@ -24,24 +25,27 @@ export default function WaitlistSuccessPage() {
         if (user) {
           setUser(user);
           
-          // Add user to waitlist table
-          const { error: waitlistError } = await supabase
+          // Check if user has completed onboarding
+          const { data: existingUser } = await supabase
             .from('waitlist')
-            .insert([
-              {
-                email: user.email,
-                name: user.user_metadata?.name || user.user_metadata?.full_name,
-                provider: user.app_metadata?.provider || 'oauth',
-                avatar_url: user.user_metadata?.avatar_url,
-                user_id: user.id
-              }
-            ])
-            .select()
+            .select('*')
+            .eq('user_id', user.id)
             .single();
 
-          if (waitlistError && !waitlistError.message.includes('duplicate')) {
-            console.error('Waitlist error:', waitlistError);
+          if (!existingUser) {
+            // User hasn't completed onboarding, redirect them
+            router.push('/waitlist/onboarding');
+            return;
           }
+
+          if (!existingUser.onboarding_completed) {
+            // User exists but hasn't completed onboarding
+            router.push('/waitlist/onboarding');
+            return;
+          }
+
+          // User has completed onboarding, set the data
+          setUserData(existingUser);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -93,6 +97,32 @@ export default function WaitlistSuccessPage() {
                 感謝您使用 {user?.user_metadata?.provider || '電子郵件'} 帳戶加入我們的等待名單。
                 我們將在 Beta 版本發布時通知您。
               </p>
+              
+              {userData && (
+                <div className="bg-white rounded-lg p-4 mb-6 text-left">
+                  <h4 className="font-semibold text-green-800 mb-2">您的學習偏好：</h4>
+                  <div className="space-y-2 text-sm text-green-700">
+                    {userData.math_interests && userData.math_interests.length > 0 && (
+                      <div>
+                        <span className="font-medium">感興趣的領域：</span>
+                        {userData.math_interests.join(', ')}
+                      </div>
+                    )}
+                    {userData.current_level && (
+                      <div>
+                        <span className="font-medium">當前程度：</span>
+                        {userData.current_level}
+                      </div>
+                    )}
+                    {userData.study_time && (
+                      <div>
+                        <span className="font-medium">學習時間：</span>
+                        {userData.study_time}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
               
               {user?.user_metadata?.avatar_url && (
                 <div className="mb-4">
