@@ -424,7 +424,7 @@ export default function LandingPage() {
               difficultyBgColor="bg-green-100"
               level="適合高中程度"
               studentCount="2,847"
-              imageSrc="/demo-card-1.png"
+              imageSrc="/asian-kid-studying.png"
               gradientFrom="blue-400"
               gradientTo="blue-600"
             />
@@ -437,7 +437,7 @@ export default function LandingPage() {
               difficultyBgColor="bg-blue-100"
               level="適合高中程度"
               studentCount="1,923"
-              imageSrc="/demo-card-1.png"
+              imageSrc="/asian-kid-studying.png"
               gradientFrom="green-400"
               gradientTo="green-600"
             />
@@ -450,7 +450,7 @@ export default function LandingPage() {
               difficultyBgColor="bg-orange-100"
               level="適合大學程度"
               studentCount="3,456"
-              imageSrc="/calculus.png"
+              imageSrc="/calculus1.png"
               gradientFrom="purple-400"
               gradientTo="purple-600"
             />
@@ -463,7 +463,7 @@ export default function LandingPage() {
               difficultyBgColor="bg-green-100"
               level="適合大學程度"
               studentCount="2,134"
-              imageSrc="/demo-card-3.png"
+              imageSrc="/calculus.png"
               gradientFrom="orange-400"
               gradientTo="orange-600"
             />
