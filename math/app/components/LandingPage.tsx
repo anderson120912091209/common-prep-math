@@ -417,7 +417,7 @@ export default function LandingPage() {
           {/* Programs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ProgramCard
-              title="學測A"
+              title="學測｜數學A"
               description="大學學測數學A，涵蓋代數、幾何、統計等核心概念，適合理工科系考生。"
               difficulty="中等"
               difficultyColor="text-green-600"
@@ -430,7 +430,7 @@ export default function LandingPage() {
             />
             
             <ProgramCard
-              title="學測B"
+              title="學測｜數學B"
               description="大學學測數學B，專注於統計與機率，適合商管、社會科學等科系考生。"
               difficulty="基礎"
               difficultyColor="text-blue-600"
@@ -450,7 +450,7 @@ export default function LandingPage() {
               difficultyBgColor="bg-orange-100"
               level="適合大學程度"
               studentCount="3,456"
-              imageSrc="/calculus1.png"
+              imageSrc="/calcimage.png"
               gradientFrom="purple-400"
               gradientTo="purple-600"
             />
