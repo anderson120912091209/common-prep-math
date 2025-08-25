@@ -29,7 +29,7 @@ export default function LandingPage() {
   const programsRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   
-  const rotatingWords = ["學測", "國中", "競賽", "微積分", "統計", "幾何"];
+  const rotatingWords = ["任何", "學測", "國中", "競賽", "微積分", "統計", "幾何"];
   
   useEffect(() => {
     // Trigger initial load animation

@@ -264,7 +264,7 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
   }
 
   return (
-    <div className={`bg-white rounded-xl p-2 border-6 border-gray-500 relative overflow-visible ${className}`}>
+    <div className={`bg-white rounded-xl p-2 border-6 border-gray-500 relative ${className}`}>
       {/* MathQuill Input Field */}
       <div className="relative" ref={containerRef}>
         <MathQuill.EditableMathField
@@ -278,21 +278,28 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
         <button
           type="button"
           onClick={() => setShowSymbols(!showSymbols)}
-          className="absolute top-2 
-          border-blue-300 border-2 right-2 bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded-lg text-xs font-medium transition-colors"
+          className="absolute top-2 right-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 hover:shadow-sm"
         >
+          <svg className="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
           f(x)
         </button>
       </div>
 
       {/* Math Symbols Panel */}
       {showSymbols && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-300 rounded-xl shadow-lg p-2 z-50 max-h-64 w-full">
-          <div className="flex justify-between items-center mb-2 flex-shrink-0">
-            <h3 className="text-xs font-bold text-gray-900">數學符號</h3>
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl p-3 z-50 max-h-80 w-full backdrop-blur-sm animate-in slide-in-from-top-2 duration-200 overflow-hidden">
+          <div className="flex justify-between items-center mb-3 flex-shrink-0">
+            <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              數學符號庫
+            </h3>
             <button 
               onClick={() => setShowSymbols(false)}
-              className="w-5 h-5 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center"
+              className="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
             >
               <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -301,31 +308,35 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
           </div>
           
           {/* Search Bar */}
-          <div className="mb-2">
+          <div className="mb-3">
             <div className="relative">
               <input
                 type="text"
-                placeholder="搜尋符號..."
+                placeholder="搜尋數學符號..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7A9CEB] focus:border-transparent"
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
               />
-              <svg className="absolute right-2 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
           </div>
           
-          <div className="overflow-y-auto max-h-52 pr-1">
-            <div className="grid grid-cols-4 gap-1">
+          <div className="overflow-y-auto max-h-64 pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div className="grid grid-cols-4 gap-1.5">
               {filteredSymbols.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => insertSymbol(item.symbol)}
-                  className="bg-gray-100 hover:bg-blue-200 border border-gray-300 rounded p-1 text-xs text-center transition-colors text-gray-800 font-medium"
+                  className="bg-gray-50 hover:bg-blue-100 border border-gray-200 rounded-lg p-1.5 text-center transition-all duration-200 hover:shadow-sm hover:border-blue-300 min-h-[50px] flex flex-col justify-center items-center"
                 >
-                  <div className="font-bold text-xs">{item.label}</div>
-                  <div className="text-xs text-gray-600 mt-0.5">{item.symbol}</div>
+                  <div className="font-semibold text-xs text-gray-800 leading-tight mb-0.5 break-words w-full">
+                    {item.label}
+                  </div>
+                  <div className="text-[9px] text-gray-500 leading-tight break-all w-full font-mono">
+                    {item.symbol.length > 12 ? item.symbol.substring(0, 10) + '...' : item.symbol}
+                  </div>
                 </button>
               ))}
             </div>
