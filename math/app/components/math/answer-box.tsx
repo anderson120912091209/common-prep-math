@@ -289,7 +289,7 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
 
       {/* Math Symbols Panel */}
       {showSymbols && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl p-3 z-50 max-h-80 w-full backdrop-blur-sm animate-in slide-in-from-top-2 duration-200 overflow-hidden">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-zinc-300 rounded-xl shadow-xl p-3 z-50 max-h-96 w-full backdrop-blur-sm animate-in slide-in-from-top-2 duration-200 overflow-hidden">
           <div className="flex justify-between items-center mb-3 flex-shrink-0">
             <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
               <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -323,7 +323,7 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({
             </div>
           </div>
           
-          <div className="overflow-y-auto max-h-64 pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="overflow-y-auto max-h-72 pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             <div className="grid grid-cols-4 gap-1.5">
               {filteredSymbols.map((item, index) => (
                 <button
