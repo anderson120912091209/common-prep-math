@@ -443,7 +443,7 @@ export default function LandingPage() {
             />
             
             <ProgramCard
-              title="微積分"
+              title="考研｜微積分"
               description="大學微積分課程，包含極限、導數、積分等核心概念，適合理工科系學生。"
               difficulty="進階"
               difficultyColor="text-orange-600"

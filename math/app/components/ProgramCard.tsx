@@ -28,10 +28,11 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
   altText
 }) => {
   return (
-    <div className="bg-white hover:shadow-lg transition-all duration-300 
-    rounded-xl overflow-hidden group cursor-pointer">
+    <div className="bg-white hover:shadow-sm transition-all duration-300 
+    rounded-xl overflow-hidden group border-2 border-zinc-300 cursor-pointer">
       {/* Upper Half - Image */}
-      <div className={`relative h-48 bg-gradient-to-br from-${gradientFrom} to-${gradientTo} overflow-hidden`}>
+      <div className={`relative h-48 bg-gradient-to-br 
+        from-${gradientFrom} to-${gradientTo} overflow-hidden`}>
         <img 
           src={imageSrc} 
           alt={altText || `${title} 課程`} 
