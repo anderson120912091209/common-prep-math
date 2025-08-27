@@ -456,40 +456,40 @@ export default function LandingPage() {
             />
             
             <ProgramCard
-              title="統計學"
+              title="大學｜統計學"
               description="統計學基礎課程，涵蓋描述統計、推論統計、機率論等實用概念。"
               difficulty="中等"
               difficultyColor="text-green-600"
               difficultyBgColor="bg-green-100"
               level="適合大學程度"
               studentCount="2,134"
-              imageSrc="/calculus.png"
+              imageSrc="/statistics2.png"
               gradientFrom="orange-400"
               gradientTo="orange-600"
             />
             
             <ProgramCard
-              title="線性代數"
+              title="大學｜線性代數"
               description="線性代數基礎課程，包含向量、矩陣、特徵值等核心概念。"
               difficulty="進階"
               difficultyColor="text-orange-600"
               difficultyBgColor="bg-orange-100"
               level="適合大學程度"
               studentCount="1,876"
-              imageSrc="/linearalg.png"
+              imageSrc="/linear-algebra.png"
               gradientFrom="red-400"
               gradientTo="red-600"
             />
             
             <ProgramCard
-              title="競賽數學"
+              title="競賽數學｜AMC"
               description="數學競賽專項訓練，包含奧林匹克數學、AMC等競賽題型解析。"
               difficulty="專家"
               difficultyColor="text-red-600"
               difficultyBgColor="bg-red-100"
               level="適合競賽程度"
               studentCount="956"
-              imageSrc="/demo3.png"
+              imageSrc="/competitions.png"
               gradientFrom="yellow-400"
               gradientTo="yellow-600"
             />
