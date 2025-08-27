@@ -71,7 +71,9 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
             </svg>
             <span>{studentCount} 學生</span>
           </div>
-          <span className="text-[#7A9CEB] font-medium">Mathy Official</span>
+          <span> 
+            <img src="/reverse-logo-with-text-black.png" alt="Mathy Logo" className="w-20 h-5" />
+          </span>
         </div>
       </div>
     </div>
