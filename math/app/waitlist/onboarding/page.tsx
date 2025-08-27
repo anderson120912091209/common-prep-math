@@ -13,16 +13,16 @@ interface OnboardingData {
 }
 
 const mathFields = [
-  { id: 'algebra', label: '代數' },
-  { id: 'geometry', label: '幾何' },
-  { id: 'calculus', label: '微積分' },
-  { id: 'statistics', label: '統計學' },
-  { id: 'linear_algebra', label: '線性代數' },
-  { id: 'trigonometry', label: '三角函數' },
-  { id: 'probability', label: '機率論' },
-  { id: 'number_theory', label: '數論' },
-  { id: 'competition_math', label: '競賽數學' },
-  { id: 'applied_math', label: '應用數學' }
+  { id: 'algebra', label: '代數', icon: '📐' },
+  { id: 'geometry', label: '幾何', icon: '🔺' },
+  { id: 'calculus', label: '微積分', icon: '∫' },
+  { id: 'statistics', label: '統計學', icon: '📊' },
+  { id: 'linear_algebra', label: '線性代數', icon: '🔢' },
+  { id: 'trigonometry', label: '三角函數', icon: '📐' },
+  { id: 'probability', label: '機率論', icon: '🎲' },
+  { id: 'number_theory', label: '數論', icon: '🔢' },
+  { id: 'competition_math', label: '競賽數學', icon: '🏆' },
+  { id: 'applied_math', label: '應用數學', icon: '⚙️' }
 ];
 
 const currentLevels = [
@@ -215,7 +215,7 @@ export default function OnboardingPage() {
             <Link href="/" className="text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors">
               返回首頁
             </Link>
-          </div>
+          </div>g
         </div>
       </nav>
 

@@ -494,6 +494,12 @@ export default function LandingPage() {
               gradientTo="yellow-600"
             />
           </div>
+          <div className="flex justify-center">
+            <h2 className="text-xl 
+            justify-center font-medium text-zinc-600 mb-6 mt-6">
+              以及更多更多學習主題...
+            </h2>
+          </div>
         </div>
       </section>
 
