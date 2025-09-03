@@ -78,14 +78,6 @@ export default function WaitlistPage() {
       {/* Footer with Animals */}
       <footer className="bg-white py-8">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="flex justify-center mb-4">
-            <img 
-              src="/animals-group.png" 
-              alt="Friendly animal characters" 
-              className="w-full h-full"
-            />
-          </div>
-          
         </div>
       </footer>
     </div>
