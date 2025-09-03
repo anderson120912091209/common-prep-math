@@ -71,7 +71,7 @@ export default function OnboardingPage() {
           .from('waitlist')
           .select('onboarding_completed')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
         if (existingUser?.onboarding_completed) {
           router.push('/waitlist/success');
@@ -150,40 +150,84 @@ export default function OnboardingPage() {
   };
 
   const handleSubmit = async () => {
-    if (!user) return;
+    if (!user) {
+      console.error('No user found');
+      return;
+    }
     
     setSubmitting(true);
     
     try {
-      // Add user to waitlist with onboarding data
-      const { error: waitlistError } = await supabase
-        .from('waitlist')
-        .insert([
-          {
-            email: user.email,
-            name: user.user_metadata?.name || user.user_metadata?.full_name,
-            provider: user.app_metadata?.provider || 'oauth',
-            avatar_url: user.user_metadata?.avatar_url,
-            user_id: user.id,
-            math_interests: onboardingData.mathInterests,
-            current_level: onboardingData.currentLevel,
-            study_time: onboardingData.studyTime,
-            learning_goals: onboardingData.learningGoals,
-            onboarding_completed: true
-          }
-        ])
-        .select()
-        .single();
+      // Prepare the data to save
+      const userData = {
+        email: user.email,
+        name: user.user_metadata?.name || user.user_metadata?.full_name || 'User',
+        provider: user.app_metadata?.provider || 'oauth',
+        avatar_url: user.user_metadata?.avatar_url,
+        user_id: user.id,
+        math_interests: onboardingData.mathInterests,
+        current_level: onboardingData.currentLevel,
+        study_time: onboardingData.studyTime,
+        learning_goals: onboardingData.learningGoals,
+        onboarding_completed: true
+      };
 
-      if (waitlistError && !waitlistError.message.includes('duplicate')) {
-        console.error('Waitlist error:', waitlistError);
-        throw new Error('Failed to save onboarding data');
+      console.log('📝 Submitting onboarding data:', userData);
+
+      // Check if user already exists in waitlist
+      const { data: existingUser, error: checkError } = await supabase
+        .from('waitlist')
+        .select('id, user_id, onboarding_completed')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      console.log('🔍 Existing user check:', { existingUser, checkError });
+
+      if (checkError && checkError.code !== 'PGRST116') {
+        console.error('❌ Error checking existing user:', checkError);
+        throw new Error(`Failed to check existing user: ${checkError.message}`);
+      }
+
+      let result;
+      if (existingUser) {
+        // Update existing user
+        console.log('📝 Updating existing user');
+        result = await supabase
+          .from('waitlist')
+          .update(userData)
+          .eq('user_id', user.id)
+          .select();
+      } else {
+        // Insert new user
+        console.log('➕ Inserting new user');
+        result = await supabase
+          .from('waitlist')
+          .insert([userData])
+          .select();
+      }
+
+      const { data, error: waitlistError } = result;
+
+      console.log('💾 Database operation result:', { data, waitlistError });
+
+      if (waitlistError) {
+        console.error('❌ Waitlist error details:', {
+          message: waitlistError.message,
+          code: waitlistError.code,
+          details: waitlistError.details,
+          hint: waitlistError.hint
+        });
+        throw new Error(`Failed to save onboarding data: ${waitlistError.message}`);
+      }
+
+      if (data && data.length > 0) {
+        console.log('✅ Successfully saved onboarding data:', data[0]);
       }
 
       router.push('/waitlist/success');
     } catch (error) {
-      console.error('Error:', error);
-      alert('發生錯誤，請稍後再試');
+      console.error('💥 Submission error:', error);
+      alert(`發生錯誤: ${error.message || '請稍後再試'}`);
     } finally {
       setSubmitting(false);
     }
@@ -215,7 +259,7 @@ export default function OnboardingPage() {
             <Link href="/" className="text-gray-600 hover:text-[#2B2B2B] font-medium transition-colors">
               返回首頁
             </Link>
-          </div>g
+          </div>
         </div>
       </nav>
 
