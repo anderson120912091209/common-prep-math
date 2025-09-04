@@ -10,6 +10,7 @@ import LeaderboardDashboard from './Leaderboard-Dashboard'
 import SuperFastInputMethod from './SuperFastInputMethod'
 import MathProgressTracker from './MathProgressTracker'
 import ProgramCard from './ProgramCard'
+import { supabase } from '../../lib/supabase';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -17,6 +18,11 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // User authentication state
+  const [user, setUser] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
   
   // Animation states for different sections
   const [animateDemo, setAnimateDemo] = useState(false);
@@ -41,6 +47,36 @@ export default function LandingPage() {
     }, 2000);
     
     return () => clearInterval(interval);
+  }, []);
+
+  // Check user authentication
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        
+        if (user && !error) {
+          setUser(user);
+          
+          // Get user data from waitlist table
+          const { data: waitlistUser } = await supabase
+            .from('waitlist')
+            .select('*')
+            .eq('user_id', user.id)
+            .single();
+            
+          if (waitlistUser) {
+            setUserData(waitlistUser);
+          }
+        }
+      } catch (error) {
+        console.error('Error checking user:', error);
+      } finally {
+        setLoadingAuth(false);
+      }
+    };
+
+    checkUser();
   }, []);
 
   // Intersection Observer for scroll animations
@@ -149,9 +185,40 @@ export default function LandingPage() {
             <Link href="/about" className="text-sm md:text-base text-gray-600 hover:text-[#7A9CEB] transition-colors duration-150 cursor-pointer">
               關於我們
             </Link>
-            <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-3 sm:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">
-              加入等待名單
-            </Link>
+            
+            {/* User Authentication Section */}
+            {!loadingAuth && (
+              <>
+                {user && userData ? (
+                  /* Signed-in user UI */
+                  <div className="flex items-center gap-3">
+                    <Link 
+                      href="/product/testing" 
+                      className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors"
+                    >
+                      🚀 測試產品
+                    </Link>
+                    <div className="flex items-center gap-2">
+                      {user.user_metadata?.avatar_url && (
+                        <img 
+                          src={user.user_metadata.avatar_url} 
+                          alt={userData.name || user.user_metadata?.name || 'User'}
+                          className="w-8 h-8 rounded-full border-2 border-gray-200"
+                        />
+                      )}
+                      <span className="text-sm text-gray-700 font-medium">
+                        {userData.name || user.user_metadata?.name || 'User'}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  /* Non-signed-in user UI */
+                  <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-3 sm:px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">
+                    加入等待名單
+                  </Link>
+                )}
+              </>
+            )}
           </div>
           
           {/* Mobile Menu Button */}
@@ -217,13 +284,44 @@ export default function LandingPage() {
                 關於我們
               </Link>
               
-              <Link 
-                href="/waitlist" 
-                className="block bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-4 py-3 rounded-lg font-medium transition-colors text-center mt-4"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                加入等待名單
-              </Link>
+              {/* Mobile User Authentication Section */}
+              {!loadingAuth && (
+                <>
+                  {user && userData ? (
+                    /* Mobile Signed-in user UI */
+                    <div className="border-t border-gray-100 pt-3">
+                      <div className="flex items-center gap-3 mb-3">
+                        {user.user_metadata?.avatar_url && (
+                          <img 
+                            src={user.user_metadata.avatar_url} 
+                            alt={userData.name || user.user_metadata?.name || 'User'}
+                            className="w-8 h-8 rounded-full border-2 border-gray-200"
+                          />
+                        )}
+                        <span className="text-sm text-gray-700 font-medium">
+                          {userData.name || user.user_metadata?.name || 'User'}
+                        </span>
+                      </div>
+                      <Link 
+                        href="/product/testing" 
+                        className="block bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        🚀 測試產品
+                      </Link>
+                    </div>
+                  ) : (
+                    /* Mobile Non-signed-in user UI */
+                    <Link 
+                      href="/waitlist" 
+                      className="block bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-4 py-3 rounded-lg font-medium transition-colors text-center mt-4"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      加入等待名單
+                    </Link>
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}
