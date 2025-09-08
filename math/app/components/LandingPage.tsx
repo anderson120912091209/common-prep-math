@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import DemoSection from './DemoSection';
+import { AdminAccessWidget } from '../../components/TeacherLoginButton';
+import { UserAvatar } from '../../components/UserAvatar';
 import { useRouter } from 'next/navigation';
 import MathQuestion from './MathQuestion';
 import AnswerBox from './math/answer-box'
@@ -198,18 +200,7 @@ export default function LandingPage() {
                     >
                       🚀 測試產品
                     </Link>
-                    <div className="flex items-center gap-2">
-                      {user.user_metadata?.avatar_url && (
-                        <img 
-                          src={user.user_metadata.avatar_url} 
-                          alt={userData.name || user.user_metadata?.name || 'User'}
-                          className="w-8 h-8 rounded-full border-2 border-gray-200"
-                        />
-                      )}
-                      <span className="text-sm text-gray-700 font-medium">
-                        {userData.name || user.user_metadata?.name || 'User'}
-                      </span>
-                    </div>
+                    <UserAvatar size="md" />
                   </div>
                 ) : (
                   /* Non-signed-in user UI */
@@ -688,6 +679,8 @@ export default function LandingPage() {
         </div>
       </section>
      
+      {/* Admin Access Widget for logged-in admins */}
+      <AdminAccessWidget />
     
     </div>
   );

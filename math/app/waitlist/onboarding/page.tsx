@@ -227,7 +227,7 @@ export default function OnboardingPage() {
       router.push('/waitlist/success');
     } catch (error) {
       console.error('💥 Submission error:', error);
-      alert(`發生錯誤: ${error.message || '請稍後再試'}`);
+      alert(`發生錯誤: ${(error as Error)?.message || '請稍後再試'}`);
     } finally {
       setSubmitting(false);
     }

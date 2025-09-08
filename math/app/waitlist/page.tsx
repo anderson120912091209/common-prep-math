@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import SupabaseForm from '../components/waitlist-ui/waitlist-form';   
+import SupabaseForm from '../components/waitlist-ui/waitlist-form';
+import { TeacherLoginButton } from '@/components/TeacherLoginButton';
+import { AdminDebugInfo } from '@/components/AdminDebugInfo';   
 
 export default function WaitlistPage() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -26,6 +28,7 @@ export default function WaitlistPage() {
             <Link href="/about" className="text-gray-600 hover:text-[#7A9CEB] transition-colors">
               關於我們
             </Link>
+            <TeacherLoginButton size="sm" variant="secondary" />
             <Link href="/waitlist" className="bg-[#7A9CEB] hover:bg-[#6B8CD9] text-white px-4 py-2 rounded-lg font-medium transition-colors">
               加入等待名單
             </Link>
@@ -80,6 +83,9 @@ export default function WaitlistPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
         </div>
       </footer>
+      
+      {/* Debug Info for Admin Testing */}
+      <AdminDebugInfo />
     </div>
   );
 }
