@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../../../lib/supabase';
+import { getMathPrograms } from '../../../lib/student-db'; // Import the new function
 import Link from 'next/link';
 import ProgramCard from '../../components/ProgramCard';
 import ContributionTable from '../../components/ContributionTable';
@@ -54,8 +55,12 @@ export default function TestingProductPage() {
     longest_streak: 0
   });
 
-  // Math programs with their questions
-  const mathPrograms: MathProgram[] = [
+  // NEW: Dynamic math programs from database
+  const [mathPrograms, setMathPrograms] = useState<MathProgram[]>([]);
+  const [programsLoading, setProgramsLoading] = useState(true);
+
+  // OLD: Hardcoded math programs (now replaced by database loading)
+  /*const mathPrograms: MathProgram[] = [
     {
       id: 'math-a',
       title: "學測｜數學A",
@@ -200,7 +205,7 @@ export default function TestingProductPage() {
         }
       ]
     }
-  ];
+  ];*/
 
   useEffect(() => {
     const checkUserAccess = async () => {
@@ -245,7 +250,23 @@ export default function TestingProductPage() {
       }
     };
 
+    // NEW: Load math programs from database
+    const loadMathPrograms = async () => {
+      try {
+        setProgramsLoading(true);
+        const programs = await getMathPrograms();
+        setMathPrograms(programs);
+        console.log(`✅ Loaded ${programs.length} math programs from database`);
+      } catch (error) {
+        console.error('Error loading math programs:', error);
+        // Keep empty array, will show fallback message
+      } finally {
+        setProgramsLoading(false);
+      }
+    };
+
     checkUserAccess();
+    loadMathPrograms();
   }, [router]);
 
   const loadUserActivity = async (userId: string) => {
@@ -572,8 +593,20 @@ export default function TestingProductPage() {
                 <p className="text-gray-600 text-lg">選擇您想要學習的數學領域</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {mathPrograms.map((program) => (
+              {programsLoading ? (
+                <div className="text-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                  <p className="text-gray-600">載入程式中...</p>
+                </div>
+              ) : mathPrograms.length === 0 ? (
+                <div className="text-center py-8">
+                  <div className="text-6xl mb-4">📚</div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">暫無可用程式</h3>
+                  <p className="text-gray-600">管理員尚未發布任何數學程式。</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {mathPrograms.map((program) => (
                   <div key={program.id} onClick={() => handleProgramSelect(program)}>
                     <ProgramCard
                       title={program.title}
@@ -588,8 +621,9 @@ export default function TestingProductPage() {
                       gradientTo={program.gradientTo}
                     />
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

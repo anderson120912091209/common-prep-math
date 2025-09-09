@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import { UserAvatar } from '@/components/UserAvatar';
-import { debugProblemsInDatabase, publishProblem } from '@/lib/admin-db';
 
 interface AdminStats {
   totalProblems: number;
@@ -21,38 +20,6 @@ export default function AdminDashboard() {
     recentActivity: 0
   });
   const [loading, setLoading] = useState(true);
-  const [debugLoading, setDebugLoading] = useState(false);
-
-  const handleDebugFlow = async () => {
-    setDebugLoading(true);
-    try {
-      console.log('🔧 [ADMIN DEBUG] Checking database state...');
-      const problems = await debugProblemsInDatabase();
-      
-      if (problems && problems.length > 0) {
-        const draftProblems = problems.filter(p => p.status === 'draft');
-        if (draftProblems.length > 0) {
-          const confirmPublish = confirm(`Found ${draftProblems.length} draft problems. Publish them all for testing?`);
-          if (confirmPublish) {
-            for (const problem of draftProblems) {
-              await publishProblem(problem.id);
-              console.log(`✅ Published problem: ${problem.title}`);
-            }
-            alert(`Published ${draftProblems.length} problems! Check student page now.`);
-          }
-        } else {
-          alert('All problems are already published!');
-        }
-      } else {
-        alert('No problems found. Create some problems first.');
-      }
-    } catch (error) {
-      console.error('Debug flow error:', error);
-      alert('Error during debug flow. Check console.');
-    } finally {
-      setDebugLoading(false);
-    }
-  };
 
   useEffect(() => {
     const loadStats = async () => {
@@ -207,18 +174,6 @@ export default function AdminDashboard() {
               <button className="w-full text-left p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
                 <div className="font-medium text-purple-900">📊 View Analytics</div>
                 <div className="text-sm text-purple-700">Check student performance and engagement</div>
-              </button>
-              <button 
-                onClick={handleDebugFlow}
-                disabled={debugLoading}
-                className="w-full text-left p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-orange-900">
-                  🔧 {debugLoading ? 'Testing...' : 'Test Teacher→Student Flow'}
-                </div>
-                <div className="text-sm text-orange-700">
-                  Debug database problems and publish drafts for testing
-                </div>
               </button>
             </div>
           </div>

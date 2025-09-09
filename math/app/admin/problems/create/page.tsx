@@ -79,7 +79,7 @@ export default function CreateProblemPage() {
         ...formData,
         difficulty_level: formData.difficulty_level as 1 | 2 | 3 | 4 | 5, // Type assertion
         problem_type: formData.problem_type as 'multiple_choice' | 'free_response' | 'true_false' | 'fill_blank', // Type assertion
-        category_ids: formData.category_ids.length > 0 ? formData.category_ids : [1], // Default to algebra
+        category_ids: formData.category_ids.length > 0 ? formData.category_ids : undefined, // Don't force category if none selected
         options: formData.problem_type === 'multiple_choice' 
           ? formData.options.filter(opt => opt.content.trim()) 
           : undefined,

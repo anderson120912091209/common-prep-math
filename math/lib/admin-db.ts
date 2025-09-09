@@ -39,6 +39,103 @@ export interface ProblemFilters {
 }
 
 // ============================================================================
+// CATEGORY MANAGEMENT
+// ============================================================================
+
+// Debug function to check what problems exist
+export async function debugProblemsInDatabase() {
+  try {
+    const { data: allProblems, error } = await supabase
+      .from('math_problems')
+      .select('id, title, content, status, is_public, created_at')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('❌ Error fetching all problems:', error);
+      return;
+    }
+
+    console.log('🔍 ALL PROBLEMS IN DATABASE:');
+    console.table(allProblems || []);
+    
+    const publishedProblems = (allProblems || []).filter(p => p.status === 'published' && p.is_public === true);
+    console.log(`📊 STUDENT-VISIBLE PROBLEMS: ${publishedProblems.length}/${(allProblems || []).length}`);
+    
+    if (publishedProblems.length === 0 && (allProblems || []).length > 0) {
+      console.log('⚠️ ISSUE: You have problems but none are published AND public!');
+      console.log('💡 SOLUTION: Use updateProblemStatus(problemId, "published") and set is_public = true');
+    }
+    
+    return allProblems;
+  } catch (error) {
+    console.error('Error debugging problems:', error);
+  }
+}
+
+export async function ensureDefaultCategories() {
+  try {
+    // Check if any categories exist
+    const { data: existingCategories, error: checkError } = await supabase
+      .from('problem_categories')
+      .select('id')
+      .limit(1);
+
+    if (checkError) {
+      console.error('Error checking categories:', checkError);
+      return;
+    }
+
+    // If no categories exist, create default ones
+    if (!existingCategories || existingCategories.length === 0) {
+      const defaultCategories = [
+        {
+          name: 'basic_algebra',
+          display_name: '基礎代數',
+          description: '基本代數運算和方程式',
+          color_hex: '#7A9CEB'
+        },
+        {
+          name: 'calculus',
+          display_name: '微積分',
+          description: '微分、積分和極限',
+          color_hex: '#10B981'
+        },
+        {
+          name: 'statistics',
+          display_name: '統計學',
+          description: '統計分析和機率',
+          color_hex: '#F59E0B'
+        },
+        {
+          name: 'linear_algebra',
+          display_name: '線性代數',
+          description: '向量、矩陣和線性變換',
+          color_hex: '#EF4444'
+        },
+        {
+          name: 'competition_math',
+          display_name: '競賽數學',
+          description: '數學競賽和奧林匹克數學',
+          color_hex: '#8B5CF6'
+        }
+      ];
+
+      const { error: insertError } = await supabase
+        .from('problem_categories')
+        .insert(defaultCategories);
+
+      if (insertError) {
+        console.error('Error creating default categories:', insertError);
+      } else {
+        console.log('✅ Created default categories');
+      }
+    }
+  } catch (error) {
+    console.error('Error in ensureDefaultCategories:', error);
+  }
+}
+
+// ============================================================================
 // PROBLEM MANAGEMENT
 // ============================================================================
 
@@ -47,6 +144,53 @@ export async function createProblem(problemData: CreateProblemData) {
   if (!user) throw new Error('Not authenticated');
 
   try {
+    console.log('🔄 Creating problem with data:', JSON.stringify(problemData, null, 2));
+    console.log('🔄 User ID:', user.id);
+    
+    // Ensure default categories exist
+    await ensureDefaultCategories();
+    
+    // Test database connectivity and permissions
+    console.log('🔄 Testing database connectivity...');
+    const { data: testData, error: testError } = await supabase
+      .from('math_problems')
+      .select('id')
+      .limit(1);
+    
+    if (testError) {
+      console.error('❌ Database access test failed:', testError);
+      console.error('❌ This might be a Row Level Security (RLS) issue');
+      throw new Error(`Database access denied: ${testError.message}`);
+    }
+    console.log('✅ Database connectivity OK');
+    
+    // Test insert permissions specifically
+    console.log('🔄 Testing insert permissions...');
+    const { data: insertTest, error: insertTestError } = await supabase
+      .from('math_problems')
+      .insert({
+        content: 'TEST INSERT - DELETE ME',
+        correct_answer: 'test',
+        difficulty_level: 1,
+        problem_type: 'multiple_choice',
+        created_by: user.id,
+        status: 'draft'
+      })
+      .select()
+      .single();
+    
+    if (insertTestError) {
+      console.error('❌ Insert permission test failed:', insertTestError);
+      console.error('❌ This is likely a Row Level Security (RLS) policy blocking inserts');
+      throw new Error(`Insert permission denied: ${insertTestError.message}`);
+    }
+    
+    // Clean up test record
+    if (insertTest) {
+      await supabase.from('math_problems').delete().eq('id', insertTest.id);
+      console.log('✅ Insert permissions OK (test record cleaned up)');
+    }
+    
     // Insert the main problem
     const { data: problem, error: problemError } = await supabase
       .from('math_problems')
@@ -60,7 +204,8 @@ export async function createProblem(problemData: CreateProblemData) {
         estimated_time_minutes: problemData.estimated_time_minutes,
         created_by: user.id,
         status: 'draft',
-        is_featured: false,
+        is_public: false, // Private until published
+        featured: false,
         total_attempts: 0,
         correct_attempts: 0
       })
@@ -118,30 +263,55 @@ export async function createProblem(problemData: CreateProblemData) {
       console.log(`✅ Created ${hints.length} hints`);
     }
 
-    // Link to categories if provided
+    // Link to categories if provided and valid
     if (problemData.category_ids && problemData.category_ids.length > 0) {
-      const categoryLinks = problemData.category_ids.map((categoryId, index) => ({
-        problem_id: problem.id,
-        category_id: categoryId,
-        is_primary: index === 0 // First category is primary
-      }));
+      // First check if all category IDs actually exist
+      const { data: existingCategories, error: categoryCheckError } = await supabase
+        .from('problem_categories')
+        .select('id')
+        .in('id', problemData.category_ids);
+      
+      if (categoryCheckError) {
+        console.error('Error checking category existence:', categoryCheckError);
+        // Continue without linking categories rather than failing
+      } else if (existingCategories && existingCategories.length > 0) {
+        const validCategoryIds = existingCategories.map(cat => cat.id);
+        const categoryLinks = validCategoryIds.map((categoryId, index) => ({
+          problem_id: problem.id,
+          category_id: categoryId,
+          is_primary: index === 0 // First category is primary
+        }));
 
-      const { error: categoryError } = await supabase
-        .from('problem_category_links')
-        .insert(categoryLinks);
+        const { error: categoryError } = await supabase
+          .from('problem_category_links')
+          .insert(categoryLinks);
 
-      if (categoryError) {
-        console.error('Error linking categories:', categoryError);
-        throw categoryError;
+        if (categoryError) {
+          console.error('Error linking categories:', categoryError);
+          // Log but don't throw - problem creation can succeed without categories
+          console.log('⚠️ Continuing without category links');
+        } else {
+          console.log(`✅ Linked to ${categoryLinks.length} categories`);
+        }
+      } else {
+        console.log('⚠️ No valid categories found to link');
       }
-
-      console.log(`✅ Linked to ${categoryLinks.length} categories`);
+    } else {
+      console.log('ℹ️ No categories provided for linking');
     }
 
     return problem;
   } catch (error) {
-    console.error('Error in createProblem:', error);
-    throw error;
+    console.error('❌ Error in createProblem:', error);
+    console.error('❌ Error details:', JSON.stringify(error, null, 2));
+    console.error('❌ Problem data:', JSON.stringify(problemData, null, 2));
+    
+    // Re-throw with more specific error message
+    if (error instanceof Error) {
+      throw new Error(`Problem creation failed: ${error.message}`);
+    } else {
+      throw new Error(`Problem creation failed: ${JSON.stringify(error)}`);
+    }
   }
 }
 
@@ -194,12 +364,26 @@ export async function getProblems(filters?: ProblemFilters) {
 
 export async function updateProblemStatus(problemId: string, status: 'draft' | 'review' | 'published' | 'archived') {
   try {
+    const updateData: any = { 
+      status,
+      updated_at: new Date().toISOString()
+    };
+    
+    // When publishing, also make public so students can see it
+    if (status === 'published') {
+      updateData.is_public = true;
+      console.log(`📤 Publishing problem ${problemId} - making it visible to students`);
+    }
+    
+    // When unpublishing, make private
+    if (status === 'draft' || status === 'archived') {
+      updateData.is_public = false;
+      console.log(`📥 Unpublishing problem ${problemId} - hiding from students`);
+    }
+
     const { data, error } = await supabase
       .from('math_problems')
-      .update({ 
-        status,
-        updated_at: new Date().toISOString()
-      })
+      .update(updateData)
       .eq('id', problemId)
       .select()
       .single();
@@ -215,6 +399,16 @@ export async function updateProblemStatus(problemId: string, status: 'draft' | '
     console.error('Error in updateProblemStatus:', error);
     throw error;
   }
+}
+
+// Quick publish function for ease of use
+export async function publishProblem(problemId: string) {
+  return updateProblemStatus(problemId, 'published');
+}
+
+// Quick unpublish function  
+export async function unpublishProblem(problemId: string) {
+  return updateProblemStatus(problemId, 'draft');
 }
 
 export async function deleteProblem(problemId: string) {
